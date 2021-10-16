@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3523CF6B271ADE5900B5D907 /* SwiftUIPolygonGeofence in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF6A271ADE5900B5D907 /* SwiftUIPolygonGeofence */; };
 		3523CF6D271ADF7B00B5D907 /* MapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523CF6C271ADF7B00B5D907 /* MapTest.swift */; };
+		3523CF70271B33EC00B5D907 /* StreamChat in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF6F271B33EC00B5D907 /* StreamChat */; };
+		3523CF72271B33EC00B5D907 /* StreamChatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF71271B33EC00B5D907 /* StreamChatUI */; };
+		3523CF75271B349E00B5D907 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523CF74271B349E00B5D907 /* ChatScreen.swift */; };
 		353ED12B271AAA5000373275 /* RemMemberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED12A271AAA5000373275 /* RemMemberApp.swift */; };
 		353ED12D271AAA5000373275 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED12C271AAA5000373275 /* ContentView.swift */; };
 		353ED12F271AAA5200373275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 353ED12E271AAA5200373275 /* Assets.xcassets */; };
@@ -98,6 +101,7 @@
 /* Begin PBXFileReference section */
 		1297CDBEFE1C8C2CDC01074F /* Pods-RemMember-RemMemberUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemMember-RemMemberUITests.debug.xcconfig"; path = "Target Support Files/Pods-RemMember-RemMemberUITests/Pods-RemMember-RemMemberUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3523CF6C271ADF7B00B5D907 /* MapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTest.swift; sourceTree = "<group>"; };
+		3523CF74271B349E00B5D907 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
 		353ED127271AAA5000373275 /* RemMember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemMember.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		353ED12A271AAA5000373275 /* RemMemberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemMemberApp.swift; sourceTree = "<group>"; };
 		353ED12C271AAA5000373275 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -180,9 +184,11 @@
 				35B1BE18271AAE8300BDD9FB /* PopupView in Frameworks */,
 				35B1BE15271AAE6400BDD9FB /* BottomSheet in Frameworks */,
 				35B1BE0F271AAE3700BDD9FB /* iTextField in Frameworks */,
+				3523CF72271B33EC00B5D907 /* StreamChatUI in Frameworks */,
 				35B1BE0C271AAE2400BDD9FB /* SDWebImageSwiftUI in Frameworks */,
 				DB734F4FD0AC4274FB50C020 /* Pods_RemMember.framework in Frameworks */,
 				35B1BE12271AAE4E00BDD9FB /* SwiftUIX in Frameworks */,
+				3523CF70271B33EC00B5D907 /* StreamChat in Frameworks */,
 				3523CF6B271ADE5900B5D907 /* SwiftUIPolygonGeofence in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,6 +212,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3523CF73271B349300B5D907 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				3523CF74271B349E00B5D907 /* ChatScreen.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		353ED11E271AAA5000373275 = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +311,7 @@
 		35B1BE37271AB00100BDD9FB /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				3523CF73271B349300B5D907 /* Chat */,
 				35B1BE67271AB21300BDD9FB /* ProfileSettings */,
 				35B1BE58271AB18900BDD9FB /* Login */,
 				35B1BE38271AB01500BDD9FB /* HomeScreen.swift */,
@@ -407,6 +422,8 @@
 				35B1BE14271AAE6400BDD9FB /* BottomSheet */,
 				35B1BE17271AAE8300BDD9FB /* PopupView */,
 				3523CF6A271ADE5900B5D907 /* SwiftUIPolygonGeofence */,
+				3523CF6F271B33EC00B5D907 /* StreamChat */,
+				3523CF71271B33EC00B5D907 /* StreamChatUI */,
 			);
 			productName = RemMember;
 			productReference = 353ED127271AAA5000373275 /* RemMember.app */;
@@ -490,6 +507,7 @@
 				35B1BE13271AAE6400BDD9FB /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				35B1BE16271AAE8300BDD9FB /* XCRemoteSwiftPackageReference "PopupView" */,
 				3523CF69271ADE5900B5D907 /* XCRemoteSwiftPackageReference "SwiftUIPolygonGeofence" */,
+				3523CF6E271B33EC00B5D907 /* XCRemoteSwiftPackageReference "stream-chat-swift" */,
 			);
 			productRefGroup = 353ED128271AAA5000373275 /* Products */;
 			projectDirPath = "";
@@ -678,6 +696,7 @@
 				35B1BE71271AB26300BDD9FB /* OrderHistory.swift in Sources */,
 				353ED12B271AAA5000373275 /* RemMemberApp.swift in Sources */,
 				35B1BE1A271AAEA300BDD9FB /* HomeViewModel.swift in Sources */,
+				3523CF75271B349E00B5D907 /* ChatScreen.swift in Sources */,
 				35B1BE3D271AB04C00BDD9FB /* ProfileScreen.swift in Sources */,
 				35B1BE30271AAFAF00BDD9FB /* StatsModel.swift in Sources */,
 				35B1BE2C271AAF8C00BDD9FB /* ClientInfoModel.swift in Sources */,
@@ -1061,6 +1080,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		3523CF6E271B33EC00B5D907 /* XCRemoteSwiftPackageReference "stream-chat-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getstream/stream-chat-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		35B1BE0A271AAE2400BDD9FB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -1108,6 +1135,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3523CF69271ADE5900B5D907 /* XCRemoteSwiftPackageReference "SwiftUIPolygonGeofence" */;
 			productName = SwiftUIPolygonGeofence;
+		};
+		3523CF6F271B33EC00B5D907 /* StreamChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3523CF6E271B33EC00B5D907 /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChat;
+		};
+		3523CF71271B33EC00B5D907 /* StreamChatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3523CF6E271B33EC00B5D907 /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChatUI;
 		};
 		35B1BE0B271AAE2400BDD9FB /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

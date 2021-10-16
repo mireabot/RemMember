@@ -29,6 +29,8 @@ struct CustomTabView : View {
                         .opacity(selectedTab == "Главная" ? 1 : 0)
                       ProfileScreen()
                         .opacity(selectedTab == "Профиль" ? 1 : 0)
+                      ChatScreen(sender: "Пользователь")
+                          .opacity(selectedTab == "Чат" ? 1 : 0)
 
                   }
               }
@@ -39,7 +41,7 @@ struct CustomTabView : View {
                       
                       TabButton(title: tab, selectedTab: $selectedTab,animation: animation)
                       
-                      if tab != tabs.last{
+                      if tab != tabs.last {
                           Spacer(minLength: 0)
                       }
                   }
