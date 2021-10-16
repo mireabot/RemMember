@@ -20,19 +20,19 @@ struct Event_View : View {
             ZStack {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("\(event.event_name)")
+                        Text("\(event.event_name ?? "")")
                             .font(.system(size: 22, weight: .bold, design: .rounded))
-                        Text("\(event.event_image)")
+                        Text("\(event.event_image ?? "")")
                             .font(.system(size: 14, weight: .medium, design: .rounded))
                             .foregroundColor(Color(#colorLiteral(red: 0.8089704949, green: 0.8089704949, blue: 0.8089704949, alpha: 1)))
                         HStack(spacing: 15){
-                            Text("\(event.event_new_details) ₽")
+                            Text("\(event.event_new_details ?? "") ₽")
                                 .font(.system(size: 16, weight: .bold, design: .rounded))
                             ZStack {
                                 Rectangle()
                                     .fill(Color.red)
                                     .frame(width: 50, height: 1)
-                                Text("\(event.event_details) ₽")
+                                Text("\(event.event_details ?? "") ₽")
                                     .foregroundColor(.black)
                             }
                         }

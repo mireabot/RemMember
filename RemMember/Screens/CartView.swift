@@ -166,8 +166,8 @@ struct CartView : View {
                 }){
                     
                     Text("Далее")
-                        .font(.title2)
-                        .fontWeight(.heavy)
+                        .font(.system(size: 18))
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding(.vertical)
                         .frame(width: UIScreen.main.bounds.width - 30)
@@ -385,7 +385,7 @@ struct CartView : View {
                             .foregroundColor(.white)
                             .padding(.vertical)
                             .frame(width: UIScreen.main.bounds.width - 30)
-                            .background( self.payment_type != "" && self.repair_type != "" ? Color("blue") : Color.black.opacity(0.5))
+                            .background( self.payment_type != "" && self.repair_type != "" ? Color("blue") : Color.black.opacity(0.3))
                             .cornerRadius(15)
                     }
                     .disabled(self.payment_type != "" && self.repair_type != "" ? false : true)

@@ -112,17 +112,13 @@ struct Home1 : View {
                 ScrollView(.vertical, showsIndicators: false) {
                     
                     VStack{
-                        if Homemodel.events.isEmpty  {
+                        if Homemodel.events.isEmpty || Homemodel.events.capacity == 1 {
                             
                         }
                         else {
-                            if Homemodel.events.capacity != 1 {
-                                Header(title: "Акции", color: .black)
-                                    .padding()
-                            }
-                            else {
-                                
-                            }
+                            Header(title: "Акции", color: .black)
+                                .padding()
+                            
                             ScrollView(.horizontal, showsIndicators: false){
                                 HStack(spacing: 15){
                                     ForEach(Homemodel.events){event in
@@ -213,17 +209,6 @@ struct Home1 : View {
                                     VStack {
                                         HStack(spacing: 25){
                                             
-                                            Button(action: {
-                                                self.showAccessories.toggle()
-                                            }) {
-                                                ZStack{
-                                                    Circle()
-                                                        .fill(Color.black.opacity(0.05))
-                                                        .frame(width: 34,height: 36)
-                                                    Image("arrow.left")
-                                                        .frame(width: 20, height: 20)
-                                                }
-                                            }
                                             Text("Аксессуары")
                                                 .font(.system(size: 20))
                                                 .fontWeight(.bold)
@@ -370,7 +355,7 @@ struct Home1 : View {
             Homemodel.locationManager.delegate = Homemodel
             Homemodel.fetchData()
             Homemodel.fetchDataAccessories()
-//            Homemodel.fetchDataEvents()
+            Homemodel.fetchDataEvents()
             clientModel.fetchClientAdress(client: userID ?? "")
         }
     }

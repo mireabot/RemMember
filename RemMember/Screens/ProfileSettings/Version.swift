@@ -18,7 +18,7 @@ struct Version : View {
                 .frame(width: 295, height: 94)
             Spacer()
             VStack(spacing: 10){
-                Text("Версия 1.0 (13)")
+                Text("Версия 1.0 (15)")
                     .foregroundColor(.black)
                     .fontWeight(.semibold)
                 Text("Все права защищены @RemMember")

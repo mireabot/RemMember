@@ -59,7 +59,7 @@ struct TabButton : View {
     var title : String
     @Binding var selectedTab : String
     var animation : Namespace.ID
-    
+    @State var userData = OrderTestModel()
     var body: some View{
         
         Button(action: {
@@ -101,6 +101,9 @@ struct TabButton : View {
                     .fontWeight(.bold)
                     .foregroundColor(Color.black.opacity(selectedTab == title ? 0.6 : 0.2))
             }
+        }
+        .onAppear{
+            userData.fetchAndMap()
         }
     }
 }

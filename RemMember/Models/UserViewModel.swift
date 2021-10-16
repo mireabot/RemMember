@@ -91,6 +91,7 @@ class UserView: ObservableObject {
             "user_name": name,
             "user_orders": 0,
             "current_adress": "",
+            "ref_code": "",
             "user_id" : Auth.auth().currentUser!.uid
             
         ]) { (err) in

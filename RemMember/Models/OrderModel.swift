@@ -37,6 +37,7 @@ struct OrderTest : Codable, Hashable {
     var payment_type : String?
     var repair_location : String?
     var order: [OrderDetails]
+    var active: Bool?
 }
 
 struct OrderDetails : Hashable, Codable {
@@ -44,8 +45,8 @@ struct OrderDetails : Hashable, Codable {
     var item_name : String
 }
 extension OrderTest {
-    static let empty = OrderTest(id: "", order_number: 0, status: "", client_name: "", client_device: "", order_master: "", client_phone: "", client_adress: "", client_ID: "", total_cost: "", master_phone: "", payment_type: "", repair_location: "", order: [])
-    static let sample = OrderTest(id: "1", order_number: 1, status: "q", client_name: "q", client_device: "q", order_master: "q", client_phone: "q", client_adress: "q", client_ID: "q", total_cost: "32500", master_phone: "Ivan", payment_type: "e", repair_location: "Office", order: [OrderDetails(item_cost: 32500, item_name: "Ремонт"),OrderDetails(item_cost: 32500, item_name: "Ремонт")])
+    static let empty = OrderTest(id: "", order_number: 0, status: "", client_name: "", client_device: "", order_master: "", client_phone: "", client_adress: "", client_ID: "", total_cost: "", master_phone: "", payment_type: "", repair_location: "", order: [],active: false)
+    static let sample = OrderTest(id: "1", order_number: 1, status: "q", client_name: "q", client_device: "q", order_master: "q", client_phone: "q", client_adress: "q", client_ID: "q", total_cost: "32500", master_phone: "Ivan", payment_type: "e", repair_location: "Office", order: [OrderDetails(item_cost: 32500, item_name: "Ремонт"),OrderDetails(item_cost: 32500, item_name: "Ремонт")],active: true)
 }
 
 

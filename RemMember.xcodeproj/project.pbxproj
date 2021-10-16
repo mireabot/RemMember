@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3523CF6B271ADE5900B5D907 /* SwiftUIPolygonGeofence in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF6A271ADE5900B5D907 /* SwiftUIPolygonGeofence */; };
+		3523CF6D271ADF7B00B5D907 /* MapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523CF6C271ADF7B00B5D907 /* MapTest.swift */; };
 		353ED12B271AAA5000373275 /* RemMemberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED12A271AAA5000373275 /* RemMemberApp.swift */; };
 		353ED12D271AAA5000373275 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED12C271AAA5000373275 /* ContentView.swift */; };
 		353ED12F271AAA5200373275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 353ED12E271AAA5200373275 /* Assets.xcassets */; };
@@ -95,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		1297CDBEFE1C8C2CDC01074F /* Pods-RemMember-RemMemberUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemMember-RemMemberUITests.debug.xcconfig"; path = "Target Support Files/Pods-RemMember-RemMemberUITests/Pods-RemMember-RemMemberUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3523CF6C271ADF7B00B5D907 /* MapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTest.swift; sourceTree = "<group>"; };
 		353ED127271AAA5000373275 /* RemMember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemMember.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		353ED12A271AAA5000373275 /* RemMemberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemMemberApp.swift; sourceTree = "<group>"; };
 		353ED12C271AAA5000373275 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -180,6 +183,7 @@
 				35B1BE0C271AAE2400BDD9FB /* SDWebImageSwiftUI in Frameworks */,
 				DB734F4FD0AC4274FB50C020 /* Pods_RemMember.framework in Frameworks */,
 				35B1BE12271AAE4E00BDD9FB /* SwiftUIX in Frameworks */,
+				3523CF6B271ADE5900B5D907 /* SwiftUIPolygonGeofence in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +354,7 @@
 				35B1BE79271AB29F00BDD9FB /* NumPad.swift */,
 				35B1BE7B271AB2A600BDD9FB /* Alerts.swift */,
 				35B1BE7D271AB2BD00BDD9FB /* MapConstructor.swift */,
+				3523CF6C271ADF7B00B5D907 /* MapTest.swift */,
 			);
 			path = "System Components";
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 				35B1BE11271AAE4E00BDD9FB /* SwiftUIX */,
 				35B1BE14271AAE6400BDD9FB /* BottomSheet */,
 				35B1BE17271AAE8300BDD9FB /* PopupView */,
+				3523CF6A271ADE5900B5D907 /* SwiftUIPolygonGeofence */,
 			);
 			productName = RemMember;
 			productReference = 353ED127271AAA5000373275 /* RemMember.app */;
@@ -483,6 +489,7 @@
 				35B1BE10271AAE4E00BDD9FB /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				35B1BE13271AAE6400BDD9FB /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				35B1BE16271AAE8300BDD9FB /* XCRemoteSwiftPackageReference "PopupView" */,
+				3523CF69271ADE5900B5D907 /* XCRemoteSwiftPackageReference "SwiftUIPolygonGeofence" */,
 			);
 			productRefGroup = 353ED128271AAA5000373275 /* Products */;
 			projectDirPath = "";
@@ -630,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3523CF6D271ADF7B00B5D907 /* MapTest.swift in Sources */,
 				35B1BE62271AB1D300BDD9FB /* AdressChoose.swift in Sources */,
 				35B1BE6D271AB24200BDD9FB /* Version.swift in Sources */,
 				35B1BE20271AAEE800BDD9FB /* OrderModel.swift in Sources */,
@@ -843,7 +851,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RemMember/RemMember.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"RemMember/Preview Content\"";
 				DEVELOPMENT_TEAM = QXN4C7HFYF;
 				ENABLE_PREVIEWS = YES;
@@ -877,7 +885,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RemMember/RemMember.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"RemMember/Preview Content\"";
 				DEVELOPMENT_TEAM = QXN4C7HFYF;
 				ENABLE_PREVIEWS = YES;
@@ -1045,6 +1053,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3523CF69271ADE5900B5D907 /* XCRemoteSwiftPackageReference "SwiftUIPolygonGeofence" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zpg6/SwiftUIPolygonGeofence";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		35B1BE0A271AAE2400BDD9FB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -1088,6 +1104,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3523CF6A271ADE5900B5D907 /* SwiftUIPolygonGeofence */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3523CF69271ADE5900B5D907 /* XCRemoteSwiftPackageReference "SwiftUIPolygonGeofence" */;
+			productName = SwiftUIPolygonGeofence;
+		};
 		35B1BE0B271AAE2400BDD9FB /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 35B1BE0A271AAE2400BDD9FB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;

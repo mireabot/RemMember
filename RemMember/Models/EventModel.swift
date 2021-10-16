@@ -7,15 +7,19 @@
 
 import Foundation
 import SwiftUI
+import FirebaseFirestoreSwift
 
 
-
-struct Event : Identifiable {
+struct Event : Codable, Hashable, Identifiable {
     
-    var id : String
-    var event_name : String
-    var event_details : String
-    var event_image : String
-    var event_new_details : String
+    @DocumentID var id : String?
+    var event_name : String?
+    var event_details : String?
+    var event_image : String?
+    var event_new_details : String?
 }
 
+extension Event {
+    static let empty = Event(id: "", event_name: "", event_details: "", event_image: "", event_new_details: "")
+    static let sample = Event(id: "", event_name: "", event_details: "", event_image: "", event_new_details: "")
+}

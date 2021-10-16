@@ -14,6 +14,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
     
     @Published var locationManager = CLLocationManager()
     @Published var search = ""
+    let db = Firestore.firestore()
     
     // Location Details....
     @Published var userLocation : CLLocation!
@@ -28,7 +29,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
     @Published var orders: [Order] = []
     @Published var user_phones : [UserPhone] = []
     // Timed Event
-    @Published var events: [Event] = []
+    @Published var events = [Event]()
     
     @Published var items: [iPhones] = []
     @Published var filtered: [iPhones] = []
@@ -179,28 +180,20 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
             self.filtered = self.items
         }
     }
-    
-    func fetchDataEvents(){
+    func fetchDataEvents() {
         
-        let db = Firestore.firestore()
-        
-        db.collection("Time_Events").addSnapshotListener { (snap, err) in
-            
-            guard let itemData = snap else{return}
-            
-            self.events = itemData.documents.compactMap({ (doc) -> Event? in
-                
-                let id = doc.documentID
-                let name = doc.get("event_name") as! String
-                let details = doc.get("event_details") as! String
-                let new_details = doc.get("event_new_details") as! String
-                let image = doc.get("event_image") as! String
-                
-                return Event(id: id, event_name: name, event_details: details, event_image: image, event_new_details: new_details)
-            })
+      db.collection("Time_Events").addSnapshotListener { (querySnapshot, error) in
+        guard let documents = querySnapshot?.documents else {
+          print("No documents")
+          return
         }
+          
+        self.events = documents.compactMap { queryDocumentSnapshot -> Event? in
+            print("Users_DONE")
+          return try? queryDocumentSnapshot.data(as: Event.self)
+        }
+      }
     }
-    
     func fetchDataAccessories(){
         
         let db = Firestore.firestore()
@@ -356,6 +349,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
             "order_number" : Int.random(in: 1..<1000),
             "payment_type": type,
             "repair_location": location,
+            "active": true,
             "client_ID" : Auth.auth().currentUser!.uid
             
         ]) { (err) in
