@@ -18,6 +18,7 @@ struct Adresses : View {
     @State var addAdress = false
     @StateObject var Homemodel = HomeViewModel()
     @StateObject var clientModel = ClientInfo()
+    @State var userID = UserDefaults.standard.string(forKey: "UserID")
     var body: some View {
         VStack {
             HStack{
@@ -56,7 +57,7 @@ struct Adresses : View {
         }
         .preferredColorScheme(.light)
         .onAppear{
-            self.clientModel.fetchClientAdress(client: Auth.auth().currentUser!.uid)
+            self.clientModel.fetchClientAdress(client: userID ?? "")
         }
     }
 }

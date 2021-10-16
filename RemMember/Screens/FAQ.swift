@@ -14,18 +14,6 @@ struct FAQ : View {
     var body: some View {
         VStack {
             HStack(spacing: 25){
-                
-                Button(action: {
-                    self.present.wrappedValue.dismiss()
-                }) {
-                    ZStack{
-                        Circle()
-                            .fill(Color.black.opacity(0.05))
-                            .frame(width: 44,height: 46)
-                        Image("arrow.left")
-                            .frame(width: 24, height: 24)
-                    }
-                }
                 Text("FAQ")
                     .font(.title)
                     .fontWeight(.bold)

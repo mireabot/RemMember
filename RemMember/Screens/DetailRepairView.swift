@@ -122,6 +122,8 @@ struct Detail: View {
                 }
             }
         })
+            .navigationTitle("")
+            .navigationBarHidden(true)
         .onAppear {
             
             withAnimation(Animation.spring().delay(0.45)){

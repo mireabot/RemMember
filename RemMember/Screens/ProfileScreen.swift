@@ -25,6 +25,7 @@ struct ProfileScreen : View {
     @StateObject var orderData = OrderTestModel()
     @StateObject var userData = UserView()
     @AppStorage("orderCreated") var status = false
+    @State var userID = UserDefaults.standard.string(forKey: "UserID")
     @State var isSmallDevice = UIScreen.main.bounds.height < 750
     func Header(title: String,color: Color) -> HStack<TupleView<(Text, Spacer)>> {
         return // since both are same so were going to make it as reuable...
@@ -210,7 +211,7 @@ struct ProfileScreen : View {
         .edgesIgnoringSafeArea(.bottom)
         .onAppear{
             self.userData.fetchAndMap()
-            userData.fetchOrderHistory(client_id: Auth.auth().currentUser!.uid)
+            userData.fetchOrderHistory(client_id: userID ?? "")
             orderData.fetchAndMap()
             guard let retrive1  = UserDefaults.standard.string(forKey: "ClientName") else { return }
             self.name = retrive1

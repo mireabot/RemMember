@@ -26,6 +26,7 @@ struct Home1 : View {
     @StateObject var orderData = OrderTestModel()
     @AppStorage("orderCreated") var status = false
     @Environment(\.presentationMode) var present
+    @State var userID = UserDefaults.standard.string(forKey: "UserID")
     var bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom
     var white = Color.black
     func Header(title: String,color: Color) -> HStack<TupleView<(Text, Spacer)>> {
@@ -370,7 +371,7 @@ struct Home1 : View {
             Homemodel.fetchData()
             Homemodel.fetchDataAccessories()
 //            Homemodel.fetchDataEvents()
-            clientModel.fetchClientAdress(client: Auth.auth().currentUser!.uid)
+            clientModel.fetchClientAdress(client: userID ?? "")
         }
     }
     func getPrice(value: Float)->String{

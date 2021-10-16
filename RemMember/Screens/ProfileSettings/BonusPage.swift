@@ -61,7 +61,7 @@ struct BonusPage : View {
                 VStack(alignment: .leading,spacing: 10){
                     
                     HStack {
-                        Text("2NOMTA")
+                        Text("\(userData.users.ref_code ?? "")")
                             .font(.system(size: 24))
                             .fontWeight(.bold)
                             .foregroundColor(Color("blue"))
