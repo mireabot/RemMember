@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		351B869A271CC5E30001799A /* AppSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B8699271CC5E30001799A /* AppSettingsModel.swift */; };
 		3523CF6B271ADE5900B5D907 /* SwiftUIPolygonGeofence in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF6A271ADE5900B5D907 /* SwiftUIPolygonGeofence */; };
 		3523CF6D271ADF7B00B5D907 /* MapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523CF6C271ADF7B00B5D907 /* MapTest.swift */; };
 		3523CF70271B33EC00B5D907 /* StreamChat in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF6F271B33EC00B5D907 /* StreamChat */; };
@@ -100,6 +101,7 @@
 
 /* Begin PBXFileReference section */
 		1297CDBEFE1C8C2CDC01074F /* Pods-RemMember-RemMemberUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemMember-RemMemberUITests.debug.xcconfig"; path = "Target Support Files/Pods-RemMember-RemMemberUITests/Pods-RemMember-RemMemberUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		351B8699271CC5E30001799A /* AppSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsModel.swift; sourceTree = "<group>"; };
 		3523CF6C271ADF7B00B5D907 /* MapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTest.swift; sourceTree = "<group>"; };
 		3523CF74271B349E00B5D907 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
 		353ED127271AAA5000373275 /* RemMember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemMember.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -304,6 +306,7 @@
 				35B1BE31271AAFC100BDD9FB /* UserModel.swift */,
 				35B1BE33271AAFD300BDD9FB /* UserViewModel.swift */,
 				35B1BE35271AAFEA00BDD9FB /* UserPhone.swift */,
+				351B8699271CC5E30001799A /* AppSettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				3523CF75271B349E00B5D907 /* ChatScreen.swift in Sources */,
 				35B1BE3D271AB04C00BDD9FB /* ProfileScreen.swift in Sources */,
 				35B1BE30271AAFAF00BDD9FB /* StatsModel.swift in Sources */,
+				351B869A271CC5E30001799A /* AppSettingsModel.swift in Sources */,
 				35B1BE2C271AAF8C00BDD9FB /* ClientInfoModel.swift in Sources */,
 				35B1BE47271AB0D000BDD9FB /* OrderProcess.swift in Sources */,
 				35B1BE43271AB09500BDD9FB /* CartView.swift in Sources */,

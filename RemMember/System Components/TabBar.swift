@@ -10,50 +10,49 @@ import SwiftUI
 
 
 struct CustomTabView : View {
-
-      @State var selectedTab = "Главная"
-        @State var showChat = false
+    @State var selectedTab = "Главная"
+    @State var showChat = false
     @AppStorage("log_Status") var type = ""
-      var edges = UIApplication.shared.windows.first?.safeAreaInsets
-      @Namespace var animation
-
-      var body: some View{
-
-          VStack(spacing: 0){
-
-              GeometryReader{_ in
-
-                  ZStack{
-                      
-                      Home1()
+    var edges = UIApplication.shared.windows.first?.safeAreaInsets
+    @Namespace var animation
+    
+    var body: some View{
+        
+        VStack(spacing: 0){
+            
+            GeometryReader{_ in
+                
+                ZStack{
+                    
+                    Home1()
                         .opacity(selectedTab == "Главная" ? 1 : 0)
-                      ProfileScreen()
+                    ProfileScreen()
                         .opacity(selectedTab == "Профиль" ? 1 : 0)
-                      ChatScreen(sender: "Пользователь")
-                          .opacity(selectedTab == "Чат" ? 1 : 0)
-
-                  }
-              }
-
-              HStack(spacing: 0){
-                  
-                  ForEach(tabs,id: \.self){tab in
-                      
-                      TabButton(title: tab, selectedTab: $selectedTab,animation: animation)
-                      
-                      if tab != tabs.last {
-                          Spacer(minLength: 0)
-                      }
-                  }
-              }
-              .padding(.horizontal,30)
-              // for iphone like 8 and SE
-              .padding(.bottom,edges!.bottom == 0 ? 15 : edges!.bottom)
-              .background(Color.white)
-          }
-          .ignoresSafeArea(.all, edges: .bottom)
-      }
-  }
+                    ChatScreen(sender: "Пользователь")
+                        .opacity(selectedTab == "Чат" ? 1 : 0)
+                    
+                }
+            }
+            
+            HStack(spacing: 0){
+                
+                ForEach(tabs,id: \.self){tab in
+                    
+                    TabButton(title: tab, selectedTab: $selectedTab,animation: animation)
+                    
+                    if tab != tabs.last {
+                        Spacer(minLength: 0)
+                    }
+                }
+            }
+            .padding(.horizontal,30)
+            // for iphone like 8 and SE
+            .padding(.bottom,edges!.bottom == 0 ? 15 : edges!.bottom)
+            .background(Color.white)
+        }
+        .ignoresSafeArea(.all, edges: .bottom)
+    }
+}
 var tabs = ["Главная","Профиль","Чат"]
 
 struct TabButton : View {
@@ -97,6 +96,16 @@ struct TabButton : View {
                     .resizable()
                     .foregroundColor(selectedTab == title ? Color("blue") : Color.black.opacity(0.2))
                     .frame(width: 24, height: 24)
+                    .overlay(
+                        
+                        // Cart Count....
+                        Circle()
+                            .fill(Color("blue"))
+                            .frame(width: 5, height: 5)
+                            .offset(x: 15, y: -12)
+                            // disbling if no items...
+                            .opacity(title == "Профиль" && userData.book.active! ? 1 : 0)
+                    )
                 
                 Text(title)
                     .font(.caption)

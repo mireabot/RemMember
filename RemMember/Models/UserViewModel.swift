@@ -77,6 +77,7 @@ class UserView: ObservableObject {
         let db = Firestore.firestore()
         let name  = UserDefaults.standard.string(forKey: "ClientName")!
         let phone = UserDefaults.standard.string(forKey: "Clientnumber")!
+        let token = UserDefaults.standard.string(forKey: "Token")!
 //        let retrive4  = UserDefaults.standard.string(forKey: "ClientStreet")!
 //        let retrive5  = UserDefaults.standard.string(forKey: "ClientApt")!
 //        let retrive6  = UserDefaults.standard.string(forKey: "ClientPad")!
@@ -91,7 +92,8 @@ class UserView: ObservableObject {
             "user_name": name,
             "user_orders": 0,
             "current_adress": "",
-            "ref_code": "",
+            "ref_code": randomString(length: 6),
+            "user_token": token,
             "user_id" : Auth.auth().currentUser!.uid
             
         ]) { (err) in
@@ -102,6 +104,11 @@ class UserView: ObservableObject {
             }
             print("success User add")
         }
+    }
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        print( String((0..<length).map{ _ in letters.randomElement()! }))
+        return String((0..<length).map{ _ in letters.randomElement()! })
     }
     func setCurrentAdress(adress: String){
         

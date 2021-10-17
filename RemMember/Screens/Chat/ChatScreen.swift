@@ -24,7 +24,7 @@ class FirebaseData: ObservableObject {
     }
     
     init() {
-        readData()
+//        readData()
     }
     
     // Reference link: https://firebase.google.com/docs/firestore/manage-data/add-data
@@ -184,9 +184,24 @@ struct ChatScreen: View {
     @ObservedObject private var keyboard = KeyboardResponder()
     
     var body: some View {
-        NavigationView{
+        VStack {
+            ZStack{
+                
+                HStack{
+                    Text("Поддержка")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                    Spacer()
+                    
+                }
+                
+                
+            }
+            .padding([.horizontal,.bottom])
+            .padding(.top,10)
             VStack {
-                List {
+                ScrollView(.vertical, showsIndicators: false) {
                     ForEach(self.datas.data){ data in
                         HStack {
                             if data.userID == self.sender { Spacer() }
@@ -209,9 +224,6 @@ struct ChatScreen: View {
             .padding(.bottom, keyboard.currentHeight)
             .edgesIgnoringSafeArea(.bottom)
             .animation(.easeOut(duration: 0.16))
-            }.onAppear(perform: checkRead)
-                .onReceive(datas.didChange) { data in
-                self.checkRead()
             }
     }
     

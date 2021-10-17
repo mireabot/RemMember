@@ -24,6 +24,7 @@ struct Home1 : View {
     @StateObject var userData = UserView()
     @StateObject var clientModel = ClientInfo()
     @StateObject var orderData = OrderTestModel()
+    @StateObject var settings = AppSettingsModel()
     @AppStorage("orderCreated") var status = false
     @Environment(\.presentationMode) var present
     @State var userID = UserDefaults.standard.string(forKey: "UserID")
@@ -62,8 +63,8 @@ struct Home1 : View {
                                     .font(.system(size: 24))
                                     .fontWeight(.medium)
                                     .foregroundColor(.black)
-                                Text("Приедем в течение 30 минут")
-                                    .foregroundColor(.gray)
+                                Text("Приедем в течение \(settings.app.delivery_time ?? "") минут")
+                                    .foregroundColor(settings.app.delivery_time! != "30" ? .orange : .gray)
                             }
                         }.sheet(isPresented: $showAdress) {
                             Adresses()
@@ -350,6 +351,7 @@ struct Home1 : View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .onAppear{
+            settings.fetchAndMapSettings()
             orderData.fetchAndMap()
             userData.fetchAndMap()
             Homemodel.locationManager.delegate = Homemodel

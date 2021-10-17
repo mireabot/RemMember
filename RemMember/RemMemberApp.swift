@@ -94,6 +94,9 @@ extension AppDelegate: MessagingDelegate{
         // Store token in Firestore For Sending Notifications From Server in Future...
         
         print(dataDict)
+        
+        UserDefaults.standard.set(fcmToken, forKey: "Token")
+        UserDefaults.standard.synchronize()
     }
 }
 
