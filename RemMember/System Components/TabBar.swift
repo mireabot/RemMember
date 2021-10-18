@@ -28,7 +28,7 @@ struct CustomTabView : View {
                         .opacity(selectedTab == "Главная" ? 1 : 0)
                     ProfileScreen()
                         .opacity(selectedTab == "Профиль" ? 1 : 0)
-                    ChatScreen(sender: "Пользователь")
+                    ChatScreen()
                         .opacity(selectedTab == "Чат" ? 1 : 0)
                     
                 }

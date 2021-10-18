@@ -12,6 +12,7 @@ import Firebase
 struct NamePage : View {
     @State var Clientname = ""
     @StateObject var Homemodel = HomeViewModel()
+    @AppStorage("current_user") var user = ""
     var body: some View {
         VStack {
             HStack{
@@ -63,6 +64,7 @@ struct NamePage : View {
                 }
             }.disabled(Clientname == "" ? true : false)
             .simultaneousGesture(TapGesture().onEnded{
+                user = Clientname
                 UserDefaults.standard.setValue(Clientname, forKey: "ClientName")
                 UserDefaults.standard.synchronize()
             })

@@ -129,5 +129,27 @@ class UserView: ObservableObject {
             }
         }
     }
+    
+    func updateToken(){
+        
+        let ref = Firestore.firestore()
+        let token = UserDefaults.standard.string(forKey: "Token") ?? ""
+        
+        ref.collection("Users").whereField("user_id", isEqualTo: Auth.auth().currentUser!.uid).getDocuments(){ (q, err) in
+            if err != nil{
+                print(err!.localizedDescription)
+                return
+            }
+            /*  else if q!.documents.count != 1{
+             print(err!.localizedDescription)
+             return
+             } */
+            else {
+                let document = q!.documents.first
+                document?.reference.updateData(["user_token" : token])
+                document?.reference.updateData(["ref_code" : self.randomString(length: 6)])
+            }
+        }
+    }
 }
 

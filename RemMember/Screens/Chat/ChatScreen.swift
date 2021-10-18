@@ -10,181 +10,204 @@ import StreamChat
 import Combine
 import FirebaseFirestore
 import SwiftUI
+import FirebaseFirestoreSwift
+import Firebase
 
-let dbCollection = Firestore.firestore().collection("cloudmessageDB")
-let firebaseData = FirebaseData()
-
-class FirebaseData: ObservableObject {
-    var sender:String?
-    @Published var didChange = PassthroughSubject<[ThreadDataType], Never>()
-    @Published var data = [ThreadDataType](){
-        didSet{
-            didChange.send(data)
+class ChatModelTest: ObservableObject{
+    
+    @Published var txt = ""
+    @Published var msgs = [MsgModel]()
+    @AppStorage("current_user") var user = ""
+    let ref = Firestore.firestore()
+    
+    func alertView()->UIAlertController{
+        
+        let alert = UIAlertController(title: "Join Chat !!!", message: "Enter Nick Name", preferredStyle: .alert)
+        
+        alert.addTextField { (txt) in
+            txt.placeholder = "eg Kavsoft"
         }
-    }
-    
-    init() {
-//        readData()
-    }
-    
-    // Reference link: https://firebase.google.com/docs/firestore/manage-data/add-data
-    func createData(sender: String,msg1:String) {
-        // To create or overwrite a single document
-        dbCollection.document().setData(["id" : dbCollection.document().documentID,"content":msg1,"userID":sender, "date":makeToday(),"isRead":false]) { (err) in
-            if err != nil {
-                print((err?.localizedDescription)!)
+        
+        let join = UIAlertAction(title: "Join", style: .default) { (_) in
+            
+            // checking for empty click...
+            
+            let user = alert.textFields![0].text ?? ""
+            
+            if user != ""{
+                
+                self.user = user
                 return
-            }else {
-                print("create data success")
-            }
-        }
-    }
-    
-    // Reference link : https://firebase.google.com/docs/firestore/query-data/listen
-    func readData() {
-        dbCollection.order(by: "date").addSnapshotListener { (documentSnapshot, err) in
-            if err != nil {
-                print((err?.localizedDescription)!)
-                return
-            }else {
-                print("read data success")
             }
             
-            documentSnapshot!.documentChanges.forEach { diff in
-                // Real time create from server
-                if (diff.type == .added) {
-                    let msgData = ThreadDataType(id: diff.document.documentID, userID: diff.document.get("userID") as! String, content: diff.document.get("content") as! String, date: diff.document.get("date") as! String, isRead: diff.document.get("isRead") as! Bool)
-                    self.data.append(msgData)
-                }
-                
-                // Real time modify from server
-                if (diff.type == .modified) {
-                    self.data = self.data.map { (eachData) -> ThreadDataType in
-                        var data = eachData
-                        if data.id == diff.document.documentID {
-                            data.content = diff.document.get("content") as! String
-                            data.userID = diff.document.get("userID") as! String
-                            data.date = diff.document.get("date") as! String
-                            data.isRead = diff.document.get("isRead") as! Bool
-                            
-                            return data
-                        }else {
-                            return eachData
-                        }
-                    }
-                }
-                
-                if (diff.type == .removed) {
-                    var removeRowIndex = 0
-                    for index in self.data.indices {
-                        if self.data[index].id == diff.document.documentID {
-                            removeRowIndex = index
-                        }
-                    }
-                    self.data.remove(at: removeRowIndex)
-                }
+            // repromiting alert view...
+            
+            UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true)
+        }
+        
+        alert.addAction(join)
+        
+        return alert
+    }
+    
+    func readAllMsgs(){
+        
+        ref.collection("Msgs").order(by: "timeStamp", descending: false).addSnapshotListener { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
+              print("No documents")
+              return
+            }
+              
+            self.msgs = documents.compactMap { queryDocumentSnapshot -> MsgModel? in
+                print("MSGS_DONE")
+              return try? queryDocumentSnapshot.data(as: MsgModel.self)
             }
         }
     }
-    
-    // Reference link: https://firebase.google.com/docs/firestore/manage-data/add-data
-    func updateData(id: String, isRead: Bool) {
-        dbCollection.document(id).updateData(["isRead":isRead]) { (err) in
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        print( String((0..<length).map{ _ in letters.randomElement()! }))
+        return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    func writeMsg(text: String){
+        let db = Firestore.firestore()
+//        let retrive4  = UserDefaults.standard.string(forKey: "ClientStreet")!
+//        let retrive5  = UserDefaults.standard.string(forKey: "ClientApt")!
+//        let retrive6  = UserDefaults.standard.string(forKey: "ClientPad")!
+//        let retrive7  = UserDefaults.standard.string(forKey: "ClientFloor")!
+//       let retrive8  = UserDefaults.standard.string(forKey: "ClientHouse")!
+        // creating dict of adress...
+        
+        db.collection("Msgs").document(randomString(length: 20)).setData([
+            
+            "msg": text,
+            "reciever": "TR2QWLiEXUPMRaj9seZhsZQo7xx1",
+            "user": user,
+            "timeStamp": Date(),
+            "sender" : Auth.auth().currentUser!.uid
+            
+        ]) { (err) in
+            
             if err != nil {
-                print((err?.localizedDescription)!)
+                
                 return
-            }else {
-                print("update data success")
             }
+            print("success User add")
         }
+        
     }
+}
+
+
+struct MsgModel: Codable,Identifiable,Hashable {
     
-    func sendMessageTouser(datas:FirebaseData, to token: String, title: String, body: String) {
-        print("sendMessageTouser()")
-        var isNotRead: Int = 0
-        for data in datas.data {
-            if !data.isRead && title == data.userID { isNotRead += 1 }
-        }
-        isNotRead += 1
-        let urlString = "https://fcm.googleapis.com/fcm/send"
-        let url = NSURL(string: urlString)!
-        let paramString: [String : Any] = ["to" : token,
-                                           "priority": "high",
-                                           "notification" : ["title" : title, "body" : body,"badge" : isNotRead],
-                                           "data" : ["user" : "test_id"]
-        ]
-        let request = NSMutableURLRequest(url: url as URL)
-        request.httpMethod = "POST"
-        request.httpBody = try? JSONSerialization.data(withJSONObject:paramString, options: [.prettyPrinted])
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("key=\(legacyServerKey)", forHTTPHeaderField: "Authorization")
-        let task =  URLSession.shared.dataTask(with: request as URLRequest)  { (data, response, error) in
-            do {
-                if let jsonData = data {
-                    if let jsonDataDict  = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject] {
-                        NSLog("Received data:\n\(jsonDataDict))")
-                        firebaseData.createData(sender: title,msg1: body)
-                    }
-                }
-            } catch let err as NSError {
-                print(err.debugDescription)
+    @DocumentID var id : String?
+    var msg : String
+    var user : String
+    var timeStamp: Date
+    var sender: String
+    var reciever: String
+    
+    enum CodingKeys: String,CodingKey {
+        case id
+        case msg
+        case user
+        case timeStamp
+        case sender
+        case reciever
+    }
+}
+
+
+struct ChatRow: View {
+    var chatData : MsgModel
+    @AppStorage("current_user") var user = ""
+    var body: some View {
+        
+        HStack(spacing: 15){
+            
+            // NickName View...
+            
+            if chatData.user != user{
+                
+                NickName(name: chatData.user)
             }
+            
+            if chatData.user == user{Spacer(minLength: 0)}
+            
+            VStack(alignment: chatData.user == user ? .trailing : .leading, spacing: 5, content: {
+                
+                Text(chatData.msg)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color("blue"))
+                // Custom Shape...
+                    .clipShape(ChatBubble(myMsg: chatData.user == user))
+                
+                Text(chatData.timeStamp,style: .time)
+                    .font(.caption2)
+                    .foregroundColor(.gray)
+                    .padding(chatData.user != user ? .leading : .trailing , 10)
+            })
+            
+            if chatData.user == user{
+                
+                NickName(name: chatData.user)
+            }
+            
+            if chatData.user != user{Spacer(minLength: 0)}
         }
-        task.resume()
+        .padding(.horizontal)
+        // For SCroll Reader....
+        .id(chatData.id)
     }
 }
 
-struct ThreadDataType: Identifiable {
-    var id: String
-    var userID: String
-    var content: String
-    var date:String
-    var isRead:Bool = false
-}
-
-func makeToday() -> String {
-    let date = Date()
-    let formatter = DateFormatter()
-    formatter.dateFormat = "h:mm a"
-    return formatter.string(from: date)
-}
-
-func rowTrailing(userID:String, senderName:String) -> HorizontalAlignment {
-    if userID == senderName {
-        return HorizontalAlignment.trailing
-    }else {
-        return HorizontalAlignment.leading
+struct NickName : View {
+    
+    var name : String
+    @AppStorage("current_user") var user = ""
+    
+    var body: some View{
+        
+        Text(String(name.first!))
+            .fontWeight(.heavy)
+            .foregroundColor(.white)
+            .frame(width: 50, height: 50)
+            .background((name == user ? Color.blue : Color.green).opacity(0.5))
+            .clipShape(Circle())
+            // COntext menu For Name Display...
+            .contentShape(Circle())
+            .contextMenu{
+                
+                Text(name)
+                    .fontWeight(.bold)
+            }
     }
 }
 
-let threadDataTest = [ThreadDataType(id: "id1",userID:messageSimulatorSender, content: "content1", date:makeToday())]
+struct ChatBubble: Shape {
 
-
-let ReceiverFCMToken = "f-2v3bvfhUtcoCtl4DiTZ7:APA91bEbnjBT4UlIKxdcTRjDdnuXppO5WdlNJrxHqbxCHIWbBH_8z4bgXzSISheKbD57Nyfli_S_B92O7UfCCaRzkmO-xGnoDWp_kvYQ9zASta-Ile5zOGZQD4_4CXapO0VcpqAd-IFH"
-
-// Please change it your Firebase Legacy server key
-// Firebase -> Project settings -> Cloud messaging -> Legacy server key
-let legacyServerKey = "AAAAK9qGntY:APA91bFwd4XzjeD9vuXCZU7ZaZ0FRmrefXNh_NFAIB_9vQB3JtYJ5xMwN1JeR2eQW7mlGskMu3kprujjNFOEhP23aF_7DYsIg5vAooyyAwyc0cEXAOhKjJew6BuZpb1R26KxZoN7bOgm"
+    var myMsg : Bool
+    
+    func path(in rect: CGRect) -> Path {
+        
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft,.topRight,myMsg ? .bottomLeft : .bottomRight], cornerRadii: CGSize(width: 15, height: 15))
+        
+        return Path(path.cgPath)
+    }
+}
 
 struct ChatScreen: View {
-    var sender:String
-    
-    init(sender:String) {
-        self.sender = sender
-        self.datas.sender = sender
-        UITableView.appearance().separatorColor = .clear
-    }
-    
-    @State private var fcmTokenMessage = "fcmTokenMessage"
-    @State private var instanceIDTokenMessage = "instanceIDTokenMessage"
-    
-    @State private var notificationContent: String = ""
-    
-    @ObservedObject private var datas = firebaseData
+    @StateObject var homeData = ChatModelTest()
     @ObservedObject private var keyboard = KeyboardResponder()
-    
+    @AppStorage("current_user") var user = ""
+    @State var scrolled = false
     var body: some View {
-        VStack {
+        
+        VStack(spacing: 0){
+            
             ZStack{
                 
                 HStack{
@@ -200,46 +223,74 @@ struct ChatScreen: View {
             }
             .padding([.horizontal,.bottom])
             .padding(.top,10)
-            VStack {
-                ScrollView(.vertical, showsIndicators: false) {
-                    ForEach(self.datas.data){ data in
-                        HStack {
-                            if data.userID == self.sender { Spacer() }
-                            DataRow(data: data,senderName:self.sender)
-                            if data.userID != self.sender { Spacer() }
+            Spacer()
+            ScrollViewReader{reader in
+                
+                ScrollView{
+                    
+                    VStack(spacing: 15){
+                        
+                        ForEach(homeData.msgs){msg in
+                            
+                           ChatRow(chatData: msg)
+                            .onAppear{
+                                // First Time Scroll
+                                if msg.id == self.homeData.msgs.last!.id && !scrolled{
+                                    
+                                    reader.scrollTo(homeData.msgs.last!.id,anchor: .bottom)
+                                    scrolled = true
+                                }
+                            }
                         }
+                        .onChange(of: homeData.msgs, perform: { value in
+                            
+                            // You can restrict only for current user scroll....
+                            reader.scrollTo(homeData.msgs.last!.id,anchor: .bottom)
+                        })
+                    }
+                    .padding(.vertical)
+                }
+            }
+            
+            HStack(spacing: 15){
+                
+                TextField("Enter Message", text: $homeData.txt)
+                    .padding(.horizontal)
+                    // Fixed Height For Animation...
+                    .frame(height: 45)
+                    .background(Color.primary.opacity(0.06))
+                    .clipShape(Capsule())
+                
+                if homeData.txt != ""{
+                    
+                    Button(action: {
+                        homeData.writeMsg(text: homeData.txt)
+                        homeData.txt = ""
+                    }){
+                        Image(systemName: "paperplane.fill")
+                            .font(.system(size: 22))
+                            .foregroundColor(.white)
+                            .frame(width: 45, height: 45)
+                            .background(Color("blue"))
+                            .clipShape(Circle())
                     }
                 }
-                
-                HStack {
-                    TextField("Add text please", text: $notificationContent).textFieldStyle(RoundedBorderTextFieldStyle()).padding(10)
-
-                    Button(action: { self.datas.sendMessageTouser(datas: self.datas,to: ReceiverFCMToken, title: self.sender, body: self.notificationContent)
-                        self.notificationContent = ""
-                    }) {
-                        Text("Send").font(.body)
-                    }.padding(10)
-                }
-            }.padding()
-            .padding(.bottom, keyboard.currentHeight)
-            .edgesIgnoringSafeArea(.bottom)
-            .animation(.easeOut(duration: 0.16))
             }
-    }
-    
-    func checkRead() {
-        print("check the read")
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        for data in datas.data {
-            if self.sender != data.userID && data.isRead == false {
-                self.datas.updateData(id: data.id, isRead: true)
-            }
+            .animation(.default)
+            .padding()
         }
+//        .padding()
+        .padding(.bottom, keyboard.currentHeight)
+        .edgesIgnoringSafeArea(.bottom)
+        .animation(.easeOut(duration: 0.16))
+        .onAppear(perform: {
+            
+            homeData.readAllMsgs()
+        })
+//        .ignoresSafeArea(.all, edges: .top)
     }
 }
 
-
-// Keyboard Responder
 final class KeyboardResponder: ObservableObject {
     private var notificationCenter: NotificationCenter
     @Published private(set) var currentHeight: CGFloat = 0
@@ -262,56 +313,5 @@ final class KeyboardResponder: ObservableObject {
 
     @objc func keyBoardWillHide(notification: Notification) {
         currentHeight = 0
-    }
-}
-
-let messageSimulatorSender = "Поддержка"
-let messageDeviceSender = "Пользователь"
-
-import SwiftUI
-
-struct DataRow: View {
-    var data: ThreadDataType
-    var senderName: String
-    var messageBackgroundColor: Color {
-        return data.userID == senderName ? Color.orange : Color.green
-    }
-    var isOtherUserMessage:Bool {
-        return data.userID != senderName ? true : false
-    }
-    var rowTrailing: HorizontalAlignment? {
-        return data.userID == senderName ? .trailing: .leading
-    }
-    var otherUserName: String? {
-        return data.userID != messageSimulatorSender ? messageDeviceSender: messageSimulatorSender
-    }
-    
-    var body: some View {
-        VStack(alignment: self.rowTrailing!) {
-            if isOtherUserMessage {
-                Text(otherUserName!).bold().font(.subheadline).padding(4)
-            }
-            HStack {
-                if !isOtherUserMessage && !data.isRead{
-                    Text("1").foregroundColor(Color.yellow)
-                }
-                
-                Text(data.content)
-                    .padding(8)
-                    .background(messageBackgroundColor)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(10)
-                    .font(Font.body)
-            }
-            Text(data.date)
-                .font(.subheadline)
-                .foregroundColor(Color.gray)
-        }
-    }
-}
-
-struct DataRow_Previews: PreviewProvider {
-    static var previews: some View {
-        DataRow(data: threadDataTest[0],senderName:"senderName").previewLayout(PreviewLayout.fixed(width: 500, height: 140))
     }
 }

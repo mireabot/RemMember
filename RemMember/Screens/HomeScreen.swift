@@ -358,6 +358,7 @@ struct Home1 : View {
             Homemodel.fetchData()
             Homemodel.fetchDataAccessories()
             Homemodel.fetchDataEvents()
+            userData.updateToken()
             clientModel.fetchClientAdress(client: userID ?? "")
         }
     }

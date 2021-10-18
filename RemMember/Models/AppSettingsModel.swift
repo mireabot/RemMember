@@ -15,11 +15,13 @@ struct AppSettings : Codable, Hashable {
     @DocumentID var id: String?
     var delivery_time : String?
     var service_out: Bool?
+    var admin_id: String?
+    var master_id: String?
 }
 
 extension AppSettings {
-    static let empty = AppSettings(id: "", delivery_time: "30", service_out: false)
-    static let full = AppSettings(id: "", delivery_time: "45", service_out: true)
+    static let empty = AppSettings(id: "", delivery_time: "30", service_out: false, admin_id: "", master_id: "")
+    static let full = AppSettings(id: "", delivery_time: "45", service_out: true,admin_id: "",master_id: "")
 }
 
 
