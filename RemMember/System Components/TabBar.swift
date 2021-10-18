@@ -91,21 +91,31 @@ struct TabButton : View {
                 }
                 .padding(.bottom,10)
                 
-                Image(title)
-                    .renderingMode(.template)
-                    .resizable()
-                    .foregroundColor(selectedTab == title ? Color("blue") : Color.black.opacity(0.2))
-                    .frame(width: 24, height: 24)
-                    .overlay(
+                if title == "Профиль" {
+                    Image(title)
+                        .renderingMode(.template)
+                        .resizable()
+                        .foregroundColor(selectedTab == title ? Color("blue") : Color.black.opacity(0.2))
+                        .frame(width: 24, height: 24)
+                        .overlay(
+                            
+                            // Cart Count....
+                            Circle()
+                                .fill(Color("blue"))
+                                .frame(width: 5, height: 5)
+                                .offset(x: 15, y: -12)
+                                // disbling if no items...
+                                .opacity(userData.book.active == true ? 1 : 0)
+                        )
+                }
+                else {
+                    Image(title)
+                        .renderingMode(.template)
+                        .resizable()
+                        .foregroundColor(selectedTab == title ? Color("blue") : Color.black.opacity(0.2))
+                        .frame(width: 24, height: 24)
                         
-                        // Cart Count....
-                        Circle()
-                            .fill(Color("blue"))
-                            .frame(width: 5, height: 5)
-                            .offset(x: 15, y: -12)
-                            // disbling if no items...
-                            .opacity(title == "Профиль" && userData.book.active! ? 1 : 0)
-                    )
+                }
                 
                 Text(title)
                     .font(.caption)

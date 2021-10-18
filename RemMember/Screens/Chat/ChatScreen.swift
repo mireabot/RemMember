@@ -71,7 +71,7 @@ class ChatModelTest: ObservableObject{
     }
     func writeMsg(text: String){
         let db = Firestore.firestore()
-//        let retrive4  = UserDefaults.standard.string(forKey: "ClientStreet")!
+        let name  = UserDefaults.standard.string(forKey: "ClientName")!
 //        let retrive5  = UserDefaults.standard.string(forKey: "ClientApt")!
 //        let retrive6  = UserDefaults.standard.string(forKey: "ClientPad")!
 //        let retrive7  = UserDefaults.standard.string(forKey: "ClientFloor")!
@@ -82,7 +82,7 @@ class ChatModelTest: ObservableObject{
             
             "msg": text,
             "reciever": "TR2QWLiEXUPMRaj9seZhsZQo7xx1",
-            "user": user,
+            "user": name,
             "timeStamp": Date(),
             "sender" : Auth.auth().currentUser!.uid
             
