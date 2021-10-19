@@ -64,6 +64,20 @@ class ChatModelTest: ObservableObject{
             }
         }
     }
+    func readChannelMsgs(user: String){
+        
+        ref.collection("Msgs\(user)").order(by: "timeStamp", descending: false).addSnapshotListener { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
+              print("No documents")
+              return
+            }
+              
+            self.msgs = documents.compactMap { queryDocumentSnapshot -> MsgModel? in
+                print("MSGS_DONE")
+              return try? queryDocumentSnapshot.data(as: MsgModel.self)
+            }
+        }
+    }
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         print( String((0..<length).map{ _ in letters.randomElement()! }))
@@ -203,6 +217,7 @@ struct ChatScreen: View {
     @StateObject var homeData = ChatModelTest()
     @ObservedObject private var keyboard = KeyboardResponder()
     @AppStorage("current_user") var user = ""
+    @State var userID = UserDefaults.standard.string(forKey: "UserID")
     @State var scrolled = false
     var body: some View {
         
@@ -211,10 +226,19 @@ struct ChatScreen: View {
             ZStack{
                 
                 HStack{
-                    Text("Поддержка")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
+                    VStack(alignment: .leading, spacing: 5){
+                        Text("Поддержка")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                        HStack {
+                            Text("Онлайн")
+                                .foregroundColor(.gray)
+                            Circle()
+                                .fill(Color.green)
+                                .frame(width: 10, height: 10)
+                        }
+                    }
                     Spacer()
                     
                 }
@@ -254,7 +278,7 @@ struct ChatScreen: View {
             
             HStack(spacing: 15){
                 
-                TextField("Enter Message", text: $homeData.txt)
+                TextField("Ваше сообщение", text: $homeData.txt)
                     .padding(.horizontal)
                     // Fixed Height For Animation...
                     .frame(height: 45)

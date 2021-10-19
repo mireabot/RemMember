@@ -12,6 +12,7 @@ import Firebase
 import BottomSheet
 
 struct Home1 : View {
+    @StateObject var chatData = ChatModelTest()
     @State var tab = 0
     @Namespace var animation
     @State var showCart = false
@@ -358,7 +359,8 @@ struct Home1 : View {
             Homemodel.fetchData()
             Homemodel.fetchDataAccessories()
             Homemodel.fetchDataEvents()
-            userData.updateToken()
+//            userData.updateToken()
+//            chatData.createChannel(user: userID ?? "")
             clientModel.fetchClientAdress(client: userID ?? "")
         }
     }
