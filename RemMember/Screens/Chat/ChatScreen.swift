@@ -84,6 +84,34 @@ class ChatModelTest: ObservableObject{
         print( String((0..<length).map{ _ in letters.randomElement()! }))
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
+    func writeMsgToAll(text: String){
+        let db = Firestore.firestore()
+        let name  = UserDefaults.standard.string(forKey: "ClientName")!
+//        let retrive4  = UserDefaults.standard.string(forKey: "ClientStreet")!
+//        let retrive5  = UserDefaults.standard.string(forKey: "ClientApt")!
+//        let retrive6  = UserDefaults.standard.string(forKey: "ClientPad")!
+//        let retrive7  = UserDefaults.standard.string(forKey: "ClientFloor")!
+//       let retrive8  = UserDefaults.standard.string(forKey: "ClientHouse")!
+        // creating dict of adress...
+        
+        db.collection("Msgs").document(randomString(length: 20)).setData([
+            
+            "msg": text,
+            "reciever": "TR2QWLiEXUPMRaj9seZhsZQo7xx1",
+            "user": name,
+            "timeStamp": Date(),
+            "sender" : Auth.auth().currentUser!.uid
+            
+        ]) { (err) in
+            
+            if err != nil {
+                
+                return
+            }
+            print("success User add")
+        }
+        
+    }
     func writeMsg(text: String,user: String){
         let db = Firestore.firestore()
         let name  = UserDefaults.standard.string(forKey: "ClientName")!
@@ -289,6 +317,7 @@ struct ChatScreen: View {
                 if homeData.txt != ""{
                     
                     Button(action: {
+                        homeData.writeMsgToAll(text: homeData.txt)
                         homeData.writeMsg(text: homeData.txt, user: userID ?? "")
                         homeData.txt = ""
                     }){
