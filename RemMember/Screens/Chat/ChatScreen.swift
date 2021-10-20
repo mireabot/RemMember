@@ -18,6 +18,7 @@ class ChatModelTest: ObservableObject{
     @Published var txt = ""
     @Published var msgs = [MsgModel]()
     @AppStorage("current_user") var user = ""
+    @State var userID = UserDefaults.standard.string(forKey: "UserID")
     let ref = Firestore.firestore()
     
     func alertView()->UIAlertController{
@@ -52,7 +53,7 @@ class ChatModelTest: ObservableObject{
     
     func readAllMsgs(){
         
-        ref.collection("Msgs").order(by: "timeStamp", descending: false).addSnapshotListener { (querySnapshot, err) in
+        ref.collection("Msgs").whereField("sender", isEqualTo: userID ?? "").order(by: "timeStamp", descending: false).addSnapshotListener { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
               print("No documents")
               return
@@ -83,7 +84,7 @@ class ChatModelTest: ObservableObject{
         print( String((0..<length).map{ _ in letters.randomElement()! }))
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
-    func writeMsg(text: String){
+    func writeMsg(text: String,user: String){
         let db = Firestore.firestore()
         let name  = UserDefaults.standard.string(forKey: "ClientName")!
 //        let retrive5  = UserDefaults.standard.string(forKey: "ClientApt")!
@@ -92,7 +93,7 @@ class ChatModelTest: ObservableObject{
 //       let retrive8  = UserDefaults.standard.string(forKey: "ClientHouse")!
         // creating dict of adress...
         
-        db.collection("Msgs").document(randomString(length: 20)).setData([
+        db.collection("Msgs\(user)").document(randomString(length: 20)).setData([
             
             "msg": text,
             "reciever": "TR2QWLiEXUPMRaj9seZhsZQo7xx1",
@@ -142,10 +143,10 @@ struct ChatRow: View {
             
             // NickName View...
             
-            if chatData.user != user{
-                
-                NickName(name: chatData.user)
-            }
+//            if chatData.user != user{
+//
+//                NickName(name: chatData.user)
+//            }
             
             if chatData.user == user{Spacer(minLength: 0)}
             
@@ -165,10 +166,10 @@ struct ChatRow: View {
                     .padding(chatData.user != user ? .leading : .trailing , 10)
             })
             
-            if chatData.user == user{
-                
-                NickName(name: chatData.user)
-            }
+//            if chatData.user == user{
+//
+//                NickName(name: chatData.user)
+//            }
             
             if chatData.user != user{Spacer(minLength: 0)}
         }
@@ -288,7 +289,7 @@ struct ChatScreen: View {
                 if homeData.txt != ""{
                     
                     Button(action: {
-                        homeData.writeMsg(text: homeData.txt)
+                        homeData.writeMsg(text: homeData.txt, user: userID ?? "")
                         homeData.txt = ""
                     }){
                         Image(systemName: "paperplane.fill")
@@ -310,6 +311,7 @@ struct ChatScreen: View {
         .onAppear(perform: {
             
             homeData.readAllMsgs()
+            homeData.readChannelMsgs(user: userID ?? "")
         })
 //        .ignoresSafeArea(.all, edges: .top)
     }
