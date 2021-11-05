@@ -44,18 +44,18 @@ struct Map : View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        clientModel.addAdress(street: self.title, comment: self.comment_text, current: false)
-                        self.present.wrappedValue.dismiss()
-                    }) {
-                        ZStack{
-                            Circle()
-                                .fill(Color("blue").opacity(0.6))
-                                .frame(width: 44,height: 46)
-                            Image("checkmark")
-                                .frame(width: 20,height: 20)
-                        }
-                    }.opacity(self.comment_text != "" && self.title != "" ? 1 : 0)
+//                    Button(action: {
+//                        clientModel.addAdress(street: self.title, comment: self.comment_text, current: false)
+//                        self.present.wrappedValue.dismiss()
+//                    }) {
+//                        ZStack{
+//                            Circle()
+//                                .fill(Color("blue").opacity(0.6))
+//                                .frame(width: 44,height: 46)
+//                            Image("checkmark")
+//                                .frame(width: 20,height: 20)
+//                        }
+//                    }.opacity(self.comment_text != "" && self.title != "" ? 1 : 0)
                 }.padding([.horizontal,.bottom])
                 .padding(.top,10)
                 .padding()
@@ -143,6 +143,26 @@ struct Map : View {
                         .padding()
                         .frame(width: UIScreen.main.bounds.width - 60,height: 50)
                 }.ignoresSafeArea(.keyboard)
+                
+                Button(action: {
+                    showingPopup.toggle()
+                    clientModel.addAdress(street: self.title, comment: self.comment_text, current: false)
+                    self.present.wrappedValue.dismiss()
+                }){
+                    ZStack{
+                        Rectangle()
+                            .fill(Color("blue"))
+                            .frame(width: UIScreen.main.bounds.width - 60,height: 56)
+                            .cornerRadius(12)
+                            .shadow(color: Color.gray.opacity(0.04), radius: 1, x: 5, y: 5)
+                            .shadow(color: Color.gray.opacity(0.04), radius: 1, x: -5, y: -5)
+                        HStack(spacing: 2){
+                            Text("Добавить адрес")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                        }
+                    }
+                }.opacity(comment_text != "" ? 1 : 0)
             }
         }
         .onTapGesture {

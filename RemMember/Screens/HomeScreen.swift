@@ -27,6 +27,7 @@ struct Home1 : View {
     @StateObject var orderData = OrderTestModel()
     @StateObject var settings = AppSettingsModel()
     @AppStorage("orderCreated") var status = false
+    @AppStorage("trig") var trig = false
     @Environment(\.presentationMode) var present
     @State var userID = UserDefaults.standard.string(forKey: "UserID")
     var bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom
@@ -164,6 +165,10 @@ struct Home1 : View {
                                                 HStack(spacing: 10){
                                                     Button(action: {
                                                         Homemodel.addToCart(item: item)
+                                                        if item.item_type == "Ремонт в офисе" {
+                                                            self.trig = true
+                                                            print("ok")
+                                                        }
                                                     }){
                                                         ZStack{
                                                             Rectangle()

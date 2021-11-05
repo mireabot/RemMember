@@ -20,6 +20,7 @@ struct CartView : View {
     @State var payment_type = ""
     @State var repair_type = ""
     @AppStorage("orderCreated") var status = false
+    @AppStorage("trig") var trig = false
     @Environment(\.presentationMode) var present
     func Header(title: String,color: Color) -> HStack<TupleView<(Text, Spacer)>> {
         return // since both are same so were going to make it as reuable...
@@ -340,9 +341,10 @@ struct CartView : View {
                                         .frame(width: 15,height: 15)
                                 }
                             }
+                            .disabled(trig ? true : false)
                             Text("Ремонт на выезде")
                                 .fontWeight(.medium)
-                                .foregroundColor(.black)
+                                .foregroundColor(!trig ? .black : .gray)
                                 .font(.system(size: 16))
                         }
                         Spacer()
@@ -372,6 +374,7 @@ struct CartView : View {
                     }.padding()
                     
                     Button(action: {
+                        self.trig = false
                         homeData.SetAmountStats(count: Int(homeData.calculateTotalPrice()) ?? 0, oldCount: viewModel.stats.amount ?? 0)
                         homeData.SetOrdersStats(count: 1, oldCount: viewModel.stats.orders ?? 0)
                         homeData.createOrder(type: payment_type,location: repair_type)
