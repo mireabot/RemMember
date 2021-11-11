@@ -164,7 +164,8 @@ struct Home1 : View {
                                                 ItemView(item: item)
                                                 HStack(spacing: 10){
                                                     Button(action: {
-                                                        Homemodel.addToCart(item: item)
+//                                                        Homemodel.addToCart(item: item)
+                                                        self.Homemodel.cartItems.append(Cart(item: item, quantity: 1))
                                                         if item.item_type == "Ремонт в офисе" {
                                                             self.trig = true
                                                             print("ok")
@@ -250,7 +251,7 @@ struct Home1 : View {
                                                             HStack(spacing: 10){
                                                                 Spacer()
                                                                 Button(action: {
-                                                                    Homemodel.addToCartTest1(item: item)
+                                                                    self.Homemodel.cartItemsAcc.append(CartAcc(accessori: item))
                                                                 }){
                                                                     ZStack{
                                                                         Rectangle()

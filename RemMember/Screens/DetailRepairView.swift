@@ -119,7 +119,7 @@ struct Detail: View {
                             Color("blue")
                         )
                         .cornerRadius(15)
-                }
+                }.padding(.bottom, 10)
             }
         })
             .navigationTitle("")

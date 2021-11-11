@@ -63,7 +63,7 @@ struct AccessoriesAllView : View {
                                 HStack(spacing: 10){
                                     Spacer()
                                     Button(action: {
-                                        Homemodel.addToCartTest1(item: item)
+                                        self.Homemodel.cartItemsAcc.append(CartAcc(accessori: item))
                                     }){
                                         ZStack{
                                             Rectangle()
