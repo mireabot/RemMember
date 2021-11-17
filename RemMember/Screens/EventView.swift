@@ -21,20 +21,15 @@ struct Event_View : View {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
                         Text("\(event.event_name ?? "")")
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
-                        Text("\(event.event_image ?? "")")
-                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                            .foregroundColor(.black)
+                            .font(.system(size: 22, weight: .bold))
+                        Text("до \(event.event_image ?? "")")
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundColor(Color(#colorLiteral(red: 0.8089704949, green: 0.8089704949, blue: 0.8089704949, alpha: 1)))
                         HStack(spacing: 15){
-                            Text("\(event.event_new_details ?? "") ₽")
-                                .font(.system(size: 16, weight: .bold, design: .rounded))
-                            ZStack {
-                                Rectangle()
-                                    .fill(Color.red)
-                                    .frame(width: 50, height: 1)
-                                Text("\(event.event_details ?? "") ₽")
-                                    .foregroundColor(.black)
-                            }
+                            Text("Новая цена: \(event.event_new_details ?? "") ₽")
+                                .foregroundColor(.black)
+                                .font(.system(size: 16, weight: .medium))
                         }
                         
                     }
@@ -42,10 +37,11 @@ struct Event_View : View {
                     Spacer()
                 }
             }
-            .frame(width: 335, height: 120)
+            .frame(width: 325, height: 141)
             .background(Color.white)
-            .cornerRadius(30)
-            .shadow(color: Color.blue.opacity(0.2), radius: 5, x: 5, y: 5)
+            .cornerRadius(10)
+            // shadows..
+            .shadow(color: Color.black.opacity(0.01), radius: 5, x: 5, y: 5)
             
         }
     }
@@ -58,3 +54,46 @@ struct Event_View : View {
 //    }
 //}
 
+struct EventDetailView : View {
+    @Environment(\.presentationMode) var present
+    @StateObject var Homemodel : HomeViewModel
+    var event : Event
+    var body: some View {
+        VStack {
+            HStack(spacing: 25){
+                
+                Button(action: {
+                    self.present.wrappedValue.dismiss()
+                }) {
+                    ZStack{
+                        Circle()
+                            .fill(Color.black.opacity(0.05))
+                            .frame(width: 44,height: 46)
+                        Image("arrow.left")
+                            .frame(width: 24, height: 24)
+                    }
+                }
+                
+                Spacer()
+                
+            }
+            .padding()
+            HStack {
+                VStack(alignment: .leading,spacing: 10) {
+                    Text(event.event_name ?? "")
+                        .font(.system(size: 20))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                    Text("Действует до \(event.event_image ?? "")")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Color(#colorLiteral(red: 0.8089704949, green: 0.8089704949, blue: 0.8089704949, alpha: 1)))
+                }
+                Spacer()
+            }.padding()
+            
+            Spacer()
+        }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+    }
+}

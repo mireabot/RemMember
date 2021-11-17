@@ -12,29 +12,39 @@ struct AccessoriesView : View {
     var item : Accessories
     var body: some View {
         HStack(spacing: 15){
-            
-            WebImage(url: URL(string: item.item_image))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 80, height: 80)
-            
             HStack{
                 
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 15) {
                     
                     Text(item.item_name)
+                        .fontWeight(.medium)
                         .foregroundColor(.black)
                     
-                    Spacer()
+                    Text(item.item_body)
+                        .foregroundColor(.black.opacity(0.4))
+                    
+                    HStack(spacing: 2){
+                        Text(getPrice(value: Float(truncating: item.item_cost)))
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color("blue"))
+                        Text("₽")
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color("blue"))
+                    }
                 }
                 
                 Spacer(minLength: 0)
                 
             }
             .padding()
+            
+            WebImage(url: URL(string: item.item_image))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 100, height: 100)
         }
         .padding()
-        .frame(width: UIScreen.main.bounds.width - 90, height: 117)
+        .frame(width: UIScreen.main.bounds.width - 90, height: 141)
         .background(Color.white)
         .cornerRadius(10)
         // shadows..

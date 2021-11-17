@@ -14,6 +14,6 @@ struct Accessories : Identifiable {
     var item_name : String
     var item_image : String
     var item_cost : NSNumber
+    var item_body: String
     var isAdded: Bool = false
 }
-

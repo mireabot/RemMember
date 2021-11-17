@@ -127,7 +127,9 @@ struct Home1 : View {
                                     ForEach(Homemodel.events){event in
                                         
                                         //                                     Card View....
-                                        Event_View(event: event)
+                                        NavigationLink(destination: EventDetailView(Homemodel: Homemodel, event: event)) {
+                                            Event_View(event: event)
+                                        }
                                     }
                                 }
                                 .padding()
@@ -165,10 +167,15 @@ struct Home1 : View {
                                                 HStack(spacing: 10){
                                                     Button(action: {
 //                                                        Homemodel.addToCart(item: item)
-                                                        self.Homemodel.cartItems.append(Cart(item: item, quantity: 1))
-                                                        if item.item_type == "Ремонт в офисе" {
-                                                            self.trig = true
-                                                            print("ok")
+                                                        if orderData.book.active == true {
+                                                            self.showAlert.toggle()
+                                                        }
+                                                        else {
+                                                            self.Homemodel.cartItems.append(Cart(item: item, quantity: 1))
+                                                            if item.item_type == "Ремонт в офисе" {
+                                                                self.trig = true
+                                                                print("ok")
+                                                            }
                                                         }
                                                     }){
                                                         ZStack{
@@ -247,32 +254,9 @@ struct Home1 : View {
                                                     ForEach(Homemodel.accessories){item in
                                                         ZStack {
                                                             AccessoriesViewForAll(item: item)
-                                                            
-                                                            HStack(spacing: 10){
-                                                                Spacer()
-                                                                Button(action: {
+                                                                .onTapGesture {
                                                                     self.Homemodel.cartItemsAcc.append(CartAcc(accessori: item))
-                                                                }){
-                                                                    ZStack{
-                                                                        Rectangle()
-                                                                            .fill(Color("blue"))
-                                                                            .frame(width: 100,height: 43)
-                                                                            .cornerRadius(12)
-                                                                        HStack(spacing: 2){
-                                                                            Text(getPrice(value: Float(truncating: item.item_cost)))
-                                                                                .fontWeight(.bold)
-                                                                                .foregroundColor(.white)
-                                                                            Text("₽")
-                                                                                .fontWeight(.bold)
-                                                                                .foregroundColor(.white)
-                                                                        }
-                                                                    }
                                                                 }
-                                                                
-                                                            }
-                                                            .padding(.trailing,5)
-                                                            .padding(.top,70)
-                                                            .padding()
                                                         }
                                                     }
                                                 }
@@ -306,33 +290,11 @@ struct Home1 : View {
                                 
                                 else {
                                     ForEach(Homemodel.accessories){item in
-                                        ZStack(alignment: Alignment(horizontal: .center, vertical: .top), content: {
+                                        Button(action: {
+                                            Homemodel.addToCartTest(item: item)
+                                        }) {
                                             AccessoriesView(item: item)
-                                            
-                                            HStack(spacing: 10){
-                                                Button(action: {
-                                                    Homemodel.addToCartTest(item: item)
-                                                }){
-                                                    ZStack{
-                                                        Rectangle()
-                                                            .fill(Color("blue"))
-                                                            .frame(width: 117,height: 43)
-                                                            .cornerRadius(12)
-                                                        HStack(spacing: 2){
-                                                            Text(getPrice(value: Float(truncating: item.item_cost)))
-                                                                .fontWeight(.bold)
-                                                                .foregroundColor(.white)
-                                                            Text("₽")
-                                                                .fontWeight(.bold)
-                                                                .foregroundColor(.white)
-                                                        }
-                                                    }
-                                                }
-                                                
-                                            }
-                                            .padding(.trailing,-90)
-                                            .padding(.top,60)
-                                        })
+                                        }
                                     }
                                 }
                             }
@@ -344,7 +306,6 @@ struct Home1 : View {
                     }
                     .padding(.bottom,100)
                 }
-                
             }
         }
         .popup(isPresented: $status, type: .toast, position: .top, autohideIn: 4) {

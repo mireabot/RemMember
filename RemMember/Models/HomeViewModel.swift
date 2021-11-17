@@ -14,7 +14,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
     
     @Published var locationManager = CLLocationManager()
     @Published var search = ""
-    let db = Firestore.firestore()
+//    let db = Firestore.firestore()
     
     // Location Details....
     @Published var userLocation : CLLocation!
@@ -47,6 +47,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
     @Published var cartItems : [Cart] = []
     @Published var cartItemsAcc : [CartAcc] = []
     @Published var ordered = false
+    private var db = Firestore.firestore()
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         
@@ -198,7 +199,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
         
         let db = Firestore.firestore()
         
-        db.collection(bd_acc).getDocuments { (snap, err) in
+        db.collection(bd_acc).addSnapshotListener { (snap, err) in
             
             guard let itemData = snap else{return}
             
@@ -208,10 +209,11 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
                 let name = doc.get("item_name") as! String
                 let cost = doc.get("item_cost") as! NSNumber
                 let image = doc.get("item_image") as! String
+                let body = doc.get("item_body") as! String
                 
                 print(doc.data())
                 
-                return Accessories(id: id, item_name: name, item_image: image, item_cost: cost)
+                return Accessories(id: id, item_name: name, item_image: image, item_cost: cost,item_body: body)
             })
             
             self.filtered_accessories = self.accessories
