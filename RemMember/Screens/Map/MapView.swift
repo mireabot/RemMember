@@ -39,17 +39,34 @@ struct Map: View {
             map
             VStack {
                 if !presentedSearchAddress {
-                    if !viewModel.coordinateInPolygon  {
-                        Text("К сожалению не работаем в данном районе")
-                            .foregroundColor(Color.white)
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 16)
-                            .padding(.top, 8)
-                            .padding(.bottom, 8)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color(red: 7 / 255, green: 197 / 255, blue: 252 / 255))
-                            )
+                    if flowState == .addAddress {
+                        ZStack {
+                            if !viewModel.coordinateInPolygon {
+                                ZStack {
+                                    Rectangle()
+                                        .fill(Color(red: 7 / 255, green: 197 / 255, blue: 252 / 255))
+                                        .frame(width: 200, height: 45)
+                                        .cornerRadius(10)
+                                    Text("Вне зоны доставки")
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            HStack {
+                                Button(action: {
+                                    self.present.wrappedValue.dismiss()
+                                }) {
+                                    ZStack{
+                                        Circle()
+                                            .fill(Color.black.opacity(0.05))
+                                            .frame(width: 44,height: 46)
+                                        Image("arrow.left")
+                                            .frame(width: 24, height: 24)
+                                    }
+                                }
+                                Spacer()
+                            }.padding()
+                        }
                     }
                     Spacer()
                 }
