@@ -43,7 +43,7 @@ struct MyAdresses : View {
                     }
                 }
             }.fullScreenCover(isPresented: $addAdress){
-                Map()
+                Map(flowState: .addAddress)
                     .preferredColorScheme(.light)
             }
         }

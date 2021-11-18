@@ -8,6 +8,17 @@
 import Foundation
 import SwiftUI
 import Firebase
+import Combine
+import CoreLocation
+
+struct AddressItem {
+    let address: String
+    let location: CLLocationCoordinate2D
+}
+
+enum ClientInfoAddAddressError: Error {
+    case undefined
+}
 
 
 class ClientInfo: NSObject, ObservableObject {
@@ -19,6 +30,26 @@ class ClientInfo: NSObject, ObservableObject {
     
     //    Client adresses list
     @Published var adresses = [Adress_Model]()
+    
+    func addAddress(_ address: AddressItem, comment: String, isCurrent: Bool) -> AnyPublisher<Bool, ClientInfoAddAddressError> {
+        return Future<Bool, ClientInfoAddAddressError> { [weak self] promise in
+            guard let self = self else { return }
+            let db = Firestore.firestore()
+            let data: [String: Any] = [
+                "client_id": Auth.auth().currentUser!.uid,
+                "client_street": address.address,
+                "client_comment": comment,
+                "is_current": isCurrent,
+            ]
+            db.collection("Client_Adresses").document(self.randomString(length: 20)).setData(data) { error in
+                if error != nil {
+                    promise(.failure(.undefined))
+                } else {
+                    promise(.success(true))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
     
     
     func addAdress(street: String, comment: String, current: Bool){
