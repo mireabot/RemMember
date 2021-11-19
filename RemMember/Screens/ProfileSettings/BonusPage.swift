@@ -10,6 +10,7 @@ import SwiftUI
 import Firebase
 
 struct BonusPage : View {
+    @State private var showShare = false
     @StateObject var userData = UserView()
     @Environment(\.presentationMode) var present
     func Header(title: String,color: Color) -> HStack<TupleView<(Text, Spacer)>> {
@@ -26,6 +27,23 @@ struct BonusPage : View {
     }
     var body: some View {
         VStack {
+            HStack(spacing: 25){
+                
+                Button(action: {
+                    self.present.wrappedValue.dismiss()
+                }) {
+                    ZStack{
+                        Circle()
+                            .fill(Color.black.opacity(0.05))
+                            .frame(width: 44,height: 46)
+                        Image("arrow.left")
+                            .frame(width: 24, height: 24)
+                    }
+                }
+                Spacer()
+                
+            }
+            .padding()
             HStack {
                 HStack(spacing: 10){
                     Text("\(userData.users.user_bonuses ?? 0)")
@@ -77,7 +95,7 @@ struct BonusPage : View {
                         .foregroundColor(.black)
                         .fontWeight(.regular)
                     Button(action: {
-                        
+                        shareButton(code: userData.users.ref_code ?? "")
                     }){
                         HStack {
                             Text("Поделиться")
@@ -97,11 +115,20 @@ struct BonusPage : View {
             }
             .padding([.horizontal,.bottom])
             Spacer()
-        }.preferredColorScheme(.light)
+        }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+        .preferredColorScheme(.light)
         .onAppear{
             self.userData.fetchOrderHistory(client_id: Auth.auth().currentUser!.uid)
             self.userData.fetchAndMap()
         }
+    }
+    func shareButton(code: String) {
+        showShare.toggle()
+        
+        let av = UIActivityViewController(activityItems: ["Ваш промокод \(code)!\nСкачай приложение по ссылке"], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
 

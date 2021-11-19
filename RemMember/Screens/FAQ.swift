@@ -77,7 +77,10 @@ struct FAQ : View {
                 }
             }
             Spacer()
-        }.preferredColorScheme(.light)
+        }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+        .preferredColorScheme(.light)
     }
 }
 
