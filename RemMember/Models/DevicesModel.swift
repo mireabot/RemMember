@@ -22,7 +22,7 @@ var devices : [Devices] = [
     Devices(title: "iPhone 12", active: false),
     Devices(title: "iPhone 11 Pro Max", active: false),
     Devices(title: "iPhone 11 Pro", active: false),
-    Devices(title: "iPhone 11", active: true),
+    Devices(title: "iPhone 11", active: false),
     Devices(title: "iPhone XS Max", active: false),
     Devices(title: "iPhone XS", active: false),
     Devices(title: "iPhone XR", active: false),

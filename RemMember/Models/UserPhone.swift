@@ -34,10 +34,11 @@ struct PhoneView : View {
                 Spacer()
                 ZStack {
                     Circle()
-                        .fill(Color("blue"))
+                        .fill(Color.white)
                         .frame(width: 30, height: 30)
-                    Image("checkmark")
-                        .frame(width: 20,height: 20)
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 16))
+                        .foregroundColor(.black)
                 }.opacity(name == phone.phone_name ? 1 : 0)
             }.padding()
         }

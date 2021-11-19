@@ -37,9 +37,7 @@ struct MyDevice : View {
                 }
             }
             Spacer()
-            Button(action: {
-                
-            }){
+            NavigationLink(destination: DeviceChoiseTest()){
                 ZStack{
                     Rectangle()
                         .fill(Color("blue"))
@@ -48,7 +46,7 @@ struct MyDevice : View {
                         .shadow(color: Color.gray.opacity(0.04), radius: 1, x: 5, y: 5)
                         .shadow(color: Color.gray.opacity(0.04), radius: 1, x: -5, y: -5)
                     HStack(spacing: 2){
-                        Text("Добавить устройство")
+                        Text("Изменить устройство")
                             .fontWeight(.bold)
                             .foregroundColor(Color.white)
                     }
@@ -67,3 +65,75 @@ struct Device_Previews: PreviewProvider {
     }
 }
 
+struct DeviceChoiseTest : View {
+    
+    @State var device : Devices = devices[0]
+    @State var tap = false
+    @State var detail = false
+    @State var next = false
+    @State var isSmallDevice = UIScreen.main.bounds.height < 750
+    @StateObject var Homemodel = HomeViewModel()
+    @AppStorage("log_Status") var status = false
+    @Environment(\.presentationMode) var present
+    var body: some View{
+        VStack{
+            HStack(spacing: 25){
+                
+                Button(action: {
+                    self.present.wrappedValue.dismiss()
+                }) {
+                    ZStack{
+                        Circle()
+                            .fill(Color.black.opacity(0.05))
+                            .frame(width: 44,height: 46)
+                        Image("arrow.left")
+                            .frame(width: 24, height: 24)
+                    }
+                }
+                Text("Изменить устройство")
+                    .font(.system(size: 24))
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.black)
+                Spacer()
+                
+            }
+            .padding()
+            ScrollView(.vertical, showsIndicators: false){
+                VStack(alignment: .leading,spacing: 20){
+                    
+                    ForEach(devices){item in
+                        DeviceView(item: item)
+                            .onTapGesture {
+                                device.active = true
+//                                self.tap = true
+//                                device = item
+//                                print(device.title)
+                            }
+                        
+                    }
+                }
+                
+            }
+            .padding()
+            
+            Spacer()
+            
+            ZStack{
+                Rectangle()
+                    .fill(self.tap == true ? Color("blue") : Color.white)
+                    .frame(width: 160,height: 56)
+                    .cornerRadius(12)
+                    .shadow(color: Color.gray.opacity(0.04), radius: 1, x: 5, y: 5)
+                    .shadow(color: Color.gray.opacity(0.04), radius: 1, x: -5, y: -5)
+                HStack(spacing: 2){
+                    Text("Далее")
+                        .fontWeight(.bold)
+                        .foregroundColor(self.tap == true ? Color.white : Color.black.opacity(0.3))
+                }
+            }
+        }
+        .preferredColorScheme(.light)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+    }
+}

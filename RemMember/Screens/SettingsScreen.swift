@@ -89,8 +89,21 @@ struct SettingsScreen : View {
                     Spacer()
                 }.padding()
                 Spacer()
+                VStack(spacing: 10){
+                    Text("Версия 1.0 (18)")
+                        .font(.system(size: 14))
+                        .foregroundColor(.black.opacity(0.4))
+                        .fontWeight(.regular)
+                    Text("Все права защищены @RemMember")
+                        .font(.system(size: 14))
+                        .foregroundColor(.black.opacity(0.4))
+                        .fontWeight(.regular)
+                }
+                Spacer()
             }
         }
+        .navigationTitle("")
+        .navigationBarHidden(true)
         .preferredColorScheme(.light)
         .edgesIgnoringSafeArea(.bottom)
     }

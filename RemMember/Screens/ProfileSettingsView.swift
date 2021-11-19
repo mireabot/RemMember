@@ -37,7 +37,7 @@ struct SettingsDetailProfile : View {
                 }
                 .padding()
                 
-                if settings.name == "Мои устройства"{
+                if settings.name == "Мое устройство"{
                     MyDevice()
                 }
                 if settings.name == "Адреса"{
@@ -46,6 +46,9 @@ struct SettingsDetailProfile : View {
                 Spacer()
             }
         }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+        .preferredColorScheme(.light)
     }
 }
 
@@ -82,12 +85,15 @@ struct SettingsDetailApp : View {
                 
                 
                 
-                if settings.name == "Версия"{
-                    Version()
+                if settings.name == "Оферта"{
+                    UrlWebView(urlToDisplay: URL(string: "https://remmember.ru/offer.html")!)
                 }
                 Spacer()
             }
         }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+        .preferredColorScheme(.light)
     }
 }
 

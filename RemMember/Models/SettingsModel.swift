@@ -17,8 +17,8 @@ struct ProfileSettings : Identifiable {
 
 var profileSettings : [ProfileSettings] = [
     
-    ProfileSettings(image: "book", name: "Адреса"),
-    ProfileSettings(image: "vercion", name: "Мои устройства")
+    ProfileSettings(image: "pin", name: "Адреса"),
+    ProfileSettings(image: "vercion", name: "Мое устройство")
     
 ]
 
@@ -26,9 +26,7 @@ struct ProfileSettingsView : View {
     @State var showDetail = false
     var settings : ProfileSettings
     var body: some View {
-        Button(action: {
-            self.showDetail.toggle()
-        }){
+        NavigationLink(destination: SettingsDetailProfile(settings: settings)){
             HStack {
                 
                 Text(settings.name).foregroundColor(.black).font(.system(size: 20))
@@ -38,10 +36,11 @@ struct ProfileSettingsView : View {
                 Image(settings.image).renderingMode(.original).resizable().frame(width: 24,height: 24)
                 
             }.padding()
-        }.fullScreenCover(isPresented: $showDetail){
-            SettingsDetailProfile(settings: settings)
-                .preferredColorScheme(.light)
         }
+        ////                        .fullScreenCover(isPresented: $showDetail){
+        ////            SettingsDetailProfile(settings: settings)
+        ////                .preferredColorScheme(.light)
+        //        }
     }
 }
 
@@ -55,8 +54,8 @@ struct AppInfoSettings : Identifiable {
 
 var InfoSettings : [AppInfoSettings] = [
     
-    AppInfoSettings(image: "vercion", name: "Версия"),
-    AppInfoSettings(image: "cart", name: "Правила пользования")
+    //    AppInfoSettings(image: "vercion", name: "Версия"),
+    AppInfoSettings(image: "info", name: "Оферта")
     
 ]
 
@@ -64,9 +63,7 @@ struct AppInfoSettingsView : View {
     @State var showDetail = false
     var settings : AppInfoSettings
     var body: some View {
-        Button(action: {
-            self.showDetail.toggle()
-        }){
+        NavigationLink(destination: SettingsDetailApp(settings: settings)){
             HStack {
                 
                 Text(settings.name).foregroundColor(.black).font(.system(size: 20))
@@ -77,10 +74,10 @@ struct AppInfoSettingsView : View {
                 
             }.padding()
         }
-        .fullScreenCover(isPresented: $showDetail){
-            SettingsDetailApp(settings: settings)
-                .preferredColorScheme(.light)
-        }
+        //        .fullScreenCover(isPresented: $showDetail){
+        //            SettingsDetailApp(settings: settings)
+        //                .preferredColorScheme(.light)
+        //        }
     }
 }
 

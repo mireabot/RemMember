@@ -24,38 +24,78 @@ struct HelpPage : View {
             }
             .padding()
             
-            Spacer()
             
-            VStack(alignment: .leading,spacing: 20){
-                Text("Остались вопросы по сервису?")
-                    .fontWeight(.semibold)
-                    .font(.system(size: 18))
-                    .foregroundColor(.black)
-                Button(action: {
-                    let telephone = "tel://"
-                        let formattedString =  telephone + "495-649-6886"
-                        guard let url = URL(string: formattedString) else { return }
-                        UIApplication.shared.open(url)
-                }){
-                    HStack {
-                        Image("phone")
-                            .frame(width: 20, height: 20)
-                        Text("+7 (495) 649 6886")
-                    }
-                }
-                Button(action: {
-                    UIApplication.shared.open(botURL!)
-                }){
-                    HStack {
-                        Image("paperplane_blue")
-                            .frame(width: 20, height: 20)
+            VStack{
+                
+                
+                HStack(spacing: 15){
+                    
+                    Image("tg")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .padding(12)
+                        .background(
+                            
+                            Color.white
+                                .clipShape(Circle())
+                        )
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        
                         Text("@modmacru")
+                            .fontWeight(.bold)
+                        
+                        Text("Всегда на связи")
+                            .font(.caption2.bold())
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Spacer(minLength: 10)
+                    
+                    Button(action: {
+                        UIApplication.shared.open(botURL!)
+                    }) {
+                        Image(systemName: "message")
+                            .font(.title2)
+                            .foregroundColor(.black)
                     }
                 }
             }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(18)
             
             Spacer()
-        }.preferredColorScheme(.light)
+            
+            VStack {
+                Text("Остались вопросы по сервису?")
+                    .font(.system(size: 16))
+                    .foregroundColor(.black.opacity(0.4))
+                Button(action: {
+                    let telephone = "tel://"
+                    let formattedString =  telephone + "7-495-649-6886"
+                    guard let url = URL(string: formattedString) else { return }
+                    UIApplication.shared.open(url)
+                }){
+                    ZStack{
+                        Rectangle()
+                            .fill(Color("blue"))
+                            .frame(width: UIScreen.main.bounds.width - 50,height: 56)
+                            .cornerRadius(12)
+                            .shadow(color: Color.gray.opacity(0.04), radius: 1, x: 5, y: 5)
+                            .shadow(color: Color.gray.opacity(0.04), radius: 1, x: -5, y: -5)
+                        HStack(spacing: 2){
+                            Text("Позвонить")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                        }
+                    }
+                }
+            }
+        }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+        .preferredColorScheme(.light)
     }
 }
 

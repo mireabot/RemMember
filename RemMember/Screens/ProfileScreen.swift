@@ -53,9 +53,7 @@ struct ProfileScreen : View {
                             .foregroundColor(.black)
                         Spacer()
                         
-                        Button(action: {
-                            self.settingsOpen.toggle()
-                        }) {
+                        NavigationLink(destination: SettingsScreen()) {
                             ZStack{
                                 Circle()
                                     .fill(Color.black.opacity(0.05))
@@ -63,9 +61,10 @@ struct ProfileScreen : View {
                                 Image("gear")
                                     .frame(width: 24, height: 24)
                             }
-                        }.fullScreenCover(isPresented: $settingsOpen, content: {
-                            SettingsScreen()
-                        })
+                        }
+//                        .fullScreenCover(isPresented: $settingsOpen, content: {
+//                            SettingsScreen()
+//                        })
                     }
                     
                     
@@ -131,9 +130,7 @@ struct ProfileScreen : View {
                 Spacer()
                 HStack {
                     VStack(alignment: .leading, spacing: 15){
-                        Button(action: {
-                            self.showBonus.toggle()
-                        }){
+                        NavigationLink(destination: BonusPage()){
                             HStack {
                                 Text("Бонусы")
                                     .foregroundColor(.black)
@@ -151,9 +148,9 @@ struct ProfileScreen : View {
                                 }
                             }
                         }
-                        .sheet(isPresented: $showBonus, content: {
-                            BonusPage()
-                        })
+//                        .fullScreenCover(isPresented: $showBonus, content: {
+//                            BonusPage()
+//                        })
                         Button(action: {
                             self.showHistory.toggle()
                         }){

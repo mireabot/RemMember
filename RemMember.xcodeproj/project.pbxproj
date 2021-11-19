@@ -13,6 +13,7 @@
 		3523CF70271B33EC00B5D907 /* StreamChat in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF6F271B33EC00B5D907 /* StreamChat */; };
 		3523CF72271B33EC00B5D907 /* StreamChatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF71271B33EC00B5D907 /* StreamChatUI */; };
 		3523CF75271B349E00B5D907 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523CF74271B349E00B5D907 /* ChatScreen.swift */; };
+		353CBB9F274793FF003CE46E /* UrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CBB9E274793FF003CE46E /* UrlView.swift */; };
 		353ED12B271AAA5000373275 /* RemMemberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED12A271AAA5000373275 /* RemMemberApp.swift */; };
 		353ED12D271AAA5000373275 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED12C271AAA5000373275 /* ContentView.swift */; };
 		353ED12F271AAA5200373275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 353ED12E271AAA5200373275 /* Assets.xcassets */; };
@@ -110,6 +111,7 @@
 		351B8699271CC5E30001799A /* AppSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsModel.swift; sourceTree = "<group>"; };
 		3523CF6C271ADF7B00B5D907 /* MapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTest.swift; sourceTree = "<group>"; };
 		3523CF74271B349E00B5D907 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
+		353CBB9E274793FF003CE46E /* UrlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlView.swift; sourceTree = "<group>"; };
 		353ED127271AAA5000373275 /* RemMember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemMember.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		353ED12A271AAA5000373275 /* RemMemberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemMemberApp.swift; sourceTree = "<group>"; };
 		353ED12C271AAA5000373275 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				35B1BE79271AB29F00BDD9FB /* NumPad.swift */,
 				35B1BE7B271AB2A600BDD9FB /* Alerts.swift */,
 				3523CF6C271ADF7B00B5D907 /* MapTest.swift */,
+				353CBB9E274793FF003CE46E /* UrlView.swift */,
 			);
 			path = "System Components";
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				35B1BE2A271AAF7800BDD9FB /* ClientOrderModel.swift in Sources */,
 				35B1BE5C271AB1A200BDD9FB /* Verification.swift in Sources */,
 				35B1BE3B271AB03A00BDD9FB /* ItemView.swift in Sources */,
+				353CBB9F274793FF003CE46E /* UrlView.swift in Sources */,
 				35B1BE53271AB14C00BDD9FB /* AddAdress.swift in Sources */,
 				35B1BE51271AB13C00BDD9FB /* EventView.swift in Sources */,
 				35B1BE3F271AB06B00BDD9FB /* SettingsScreen.swift in Sources */,
