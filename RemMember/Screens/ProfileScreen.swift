@@ -59,6 +59,7 @@ struct ProfileScreen : View {
                                     .fill(Color.black.opacity(0.05))
                                     .frame(width: 44,height: 46)
                                 Image("gear")
+                                    .resizable()
                                     .frame(width: 24, height: 24)
                             }
                         }
@@ -82,7 +83,14 @@ struct ProfileScreen : View {
                                 .font(.system(size: 14))
                                 .foregroundColor(.gray)
                             
-                        }.padding()
+                        }
+                        .onTapGesture {
+                            showEdit.toggle()
+                        }
+                        .sheet(isPresented: $showEdit){
+                            PhoneEdit()
+                        }
+                        .padding()
                     }
                     Spacer()
                 }.padding(5)

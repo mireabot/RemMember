@@ -52,7 +52,7 @@ struct NamePage : View {
                 ZStack{
                     Rectangle()
                         .fill(Clientname == "" ? Color.white : Color("blue"))
-                        .frame(width: 160,height: 56)
+                        .frame(width: UIScreen.main.bounds.width - 50,height: 56)
                         .cornerRadius(12)
                         .shadow(color: Color.gray.opacity(0.04), radius: 1, x: 5, y: 5)
                         .shadow(color: Color.gray.opacity(0.04), radius: 1, x: -5, y: -5)

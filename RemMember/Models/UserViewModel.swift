@@ -130,6 +130,46 @@ class UserView: ObservableObject {
         }
     }
     
+    func updatePhone(phone: String){
+        
+        let ref = Firestore.firestore()
+        
+        ref.collection("Users").whereField("user_id", isEqualTo: Auth.auth().currentUser!.uid).getDocuments(){ (q, err) in
+            if err != nil{
+                print(err!.localizedDescription)
+                return
+            }
+            /*  else if q!.documents.count != 1{
+             print(err!.localizedDescription)
+             return
+             } */
+            else {
+                let document = q!.documents.first
+                document?.reference.updateData(["user_phone" : phone])
+            }
+        }
+    }
+    func updatePhoneModel(phone: String){
+        
+        let ref = Firestore.firestore()
+        
+        ref.collection("Client_phones").whereField("client_id", isEqualTo: Auth.auth().currentUser!.uid).getDocuments(){ (q, err) in
+            if err != nil{
+                print(err!.localizedDescription)
+                return
+            }
+            /*  else if q!.documents.count != 1{
+             print(err!.localizedDescription)
+             return
+             } */
+            else {
+                let document = q!.documents.first
+                document?.reference.updateData(["client_phone" : phone])
+                UserDefaults.standard.setValue(phone, forKey: "ClientDevice")
+                UserDefaults.standard.synchronize()
+            }
+        }
+    }
     func updateToken(){
         
         let ref = Firestore.firestore()

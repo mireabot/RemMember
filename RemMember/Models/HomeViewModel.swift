@@ -235,6 +235,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
             else {
                 let document = q!.documents.first
                 document?.reference.updateData(["status" : "Отменен"])
+                document?.reference.updateData(["active" : false])
             }
         }
     }

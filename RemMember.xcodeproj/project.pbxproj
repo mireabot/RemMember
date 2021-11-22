@@ -21,6 +21,7 @@
 		353ED13C271AAA5200373275 /* RemMemberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED13B271AAA5200373275 /* RemMemberTests.swift */; };
 		353ED146271AAA5200373275 /* RemMemberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED145271AAA5200373275 /* RemMemberUITests.swift */; };
 		353ED148271AAA5200373275 /* RemMemberUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED147271AAA5200373275 /* RemMemberUITestsLaunchTests.swift */; };
+		357D0C31274935CC00284D11 /* PhoneEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357D0C30274935CC00284D11 /* PhoneEdit.swift */; };
 		35B1BE07271AADA500BDD9FB /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE06271AADA500BDD9FB /* MainItem.swift */; };
 		35B1BE09271AADE100BDD9FB /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE08271AADE100BDD9FB /* SettingsModel.swift */; };
 		35B1BE0C271AAE2400BDD9FB /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 35B1BE0B271AAE2400BDD9FB /* SDWebImageSwiftUI */; };
@@ -54,7 +55,6 @@
 		35B1BE49271AB0E400BDD9FB /* MyAdresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE48271AB0E400BDD9FB /* MyAdresses.swift */; };
 		35B1BE4B271AB0F400BDD9FB /* FAQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE4A271AB0F400BDD9FB /* FAQ.swift */; };
 		35B1BE4D271AB10E00BDD9FB /* AccessoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE4C271AB10E00BDD9FB /* AccessoriesView.swift */; };
-		35B1BE4F271AB12500BDD9FB /* AllAccessoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE4E271AB12500BDD9FB /* AllAccessoriesView.swift */; };
 		35B1BE51271AB13C00BDD9FB /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE50271AB13C00BDD9FB /* EventView.swift */; };
 		35B1BE53271AB14C00BDD9FB /* AddAdress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE52271AB14C00BDD9FB /* AddAdress.swift */; };
 		35B1BE55271AB16000BDD9FB /* AdressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE54271AB16000BDD9FB /* AdressView.swift */; };
@@ -122,6 +122,7 @@
 		353ED141271AAA5200373275 /* RemMemberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemMemberUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		353ED145271AAA5200373275 /* RemMemberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemMemberUITests.swift; sourceTree = "<group>"; };
 		353ED147271AAA5200373275 /* RemMemberUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemMemberUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		357D0C30274935CC00284D11 /* PhoneEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEdit.swift; sourceTree = "<group>"; };
 		35B1BE06271AADA500BDD9FB /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		35B1BE08271AADE100BDD9FB /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		35B1BE19271AAEA300BDD9FB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -150,7 +151,6 @@
 		35B1BE48271AB0E400BDD9FB /* MyAdresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdresses.swift; sourceTree = "<group>"; };
 		35B1BE4A271AB0F400BDD9FB /* FAQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQ.swift; sourceTree = "<group>"; };
 		35B1BE4C271AB10E00BDD9FB /* AccessoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoriesView.swift; sourceTree = "<group>"; };
-		35B1BE4E271AB12500BDD9FB /* AllAccessoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAccessoriesView.swift; sourceTree = "<group>"; };
 		35B1BE50271AB13C00BDD9FB /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		35B1BE52271AB14C00BDD9FB /* AddAdress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdress.swift; sourceTree = "<group>"; };
 		35B1BE54271AB16000BDD9FB /* AdressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdressView.swift; sourceTree = "<group>"; };
@@ -343,11 +343,11 @@
 				35B1BE48271AB0E400BDD9FB /* MyAdresses.swift */,
 				35B1BE4A271AB0F400BDD9FB /* FAQ.swift */,
 				35B1BE4C271AB10E00BDD9FB /* AccessoriesView.swift */,
-				35B1BE4E271AB12500BDD9FB /* AllAccessoriesView.swift */,
 				35B1BE50271AB13C00BDD9FB /* EventView.swift */,
 				35B1BE52271AB14C00BDD9FB /* AddAdress.swift */,
 				35B1BE54271AB16000BDD9FB /* AdressView.swift */,
 				35B1BE56271AB17000BDD9FB /* HelpScreen.swift */,
+				357D0C30274935CC00284D11 /* PhoneEdit.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -723,12 +723,12 @@
 				35B1BE78271AB29800BDD9FB /* Numbers.swift in Sources */,
 				35B1BE5A271AB19100BDD9FB /* Login.swift in Sources */,
 				35B1BE69271AB22600BDD9FB /* MyDevice.swift in Sources */,
+				357D0C31274935CC00284D11 /* PhoneEdit.swift in Sources */,
 				35B1BE4B271AB0F400BDD9FB /* FAQ.swift in Sources */,
 				35B1BE1C271AAEC200BDD9FB /* Cart.swift in Sources */,
 				35B1BE7A271AB29F00BDD9FB /* NumPad.swift in Sources */,
 				D751C013274649020037C287 /* Geocoder.swift in Sources */,
 				35B1BE36271AAFEA00BDD9FB /* UserPhone.swift in Sources */,
-				35B1BE4F271AB12500BDD9FB /* AllAccessoriesView.swift in Sources */,
 				35B1BE34271AAFD300BDD9FB /* UserViewModel.swift in Sources */,
 				353ED12D271AAA5000373275 /* ContentView.swift in Sources */,
 				35B1BE55271AB16000BDD9FB /* AdressView.swift in Sources */,
@@ -918,7 +918,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RemMember/RemMember.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"RemMember/Preview Content\"";
 				DEVELOPMENT_TEAM = QXN4C7HFYF;
 				ENABLE_PREVIEWS = YES;
@@ -952,7 +952,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RemMember/RemMember.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"RemMember/Preview Content\"";
 				DEVELOPMENT_TEAM = QXN4C7HFYF;
 				ENABLE_PREVIEWS = YES;

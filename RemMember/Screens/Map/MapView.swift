@@ -20,7 +20,7 @@ enum MapFolowState {
 struct Map: View {
     
     @StateObject var viewModel = MapViewModel()
-    
+    @StateObject var clientData = ClientInfo()
     @State var presentedSearchAddress = false
     
     @AppStorage("first_lanch") var lanch = false
@@ -68,6 +68,21 @@ struct Map: View {
                             }.padding()
                         }
                     }
+                    if flowState == .afterRegistration {
+                        ZStack {
+                            if !viewModel.coordinateInPolygon {
+                                ZStack {
+                                    Rectangle()
+                                        .fill(Color(red: 7 / 255, green: 197 / 255, blue: 252 / 255))
+                                        .frame(width: 200, height: 45)
+                                        .cornerRadius(10)
+                                    Text("Вне зоны доставки")
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                        }
+                    }
                     Spacer()
                 }
                 MapBottomSheet(isFullPresented: $presentedSearchAddress, comments: $viewModel.comments, searchedAddress: $viewModel.searchedAddress, animation: .default, onPress: onPressHandler()
@@ -102,7 +117,7 @@ struct Map: View {
             case .afterRegistration:
                 UserDefaults.standard.setValue(self.viewModel.searchedAddress, forKey: "ClientStreet")
                 UserDefaults.standard.setValue(self.viewModel.comments, forKey: "ClientComment")
-                viewModel.addAddress(isCurrent: true)
+                clientData.addAdress(street: self.viewModel.searchedAddress, comment: self.viewModel.comments, current: true)
                 viewModel.setCurrentAddress()
                 withAnimation{ status = true }
             case .addAddress:

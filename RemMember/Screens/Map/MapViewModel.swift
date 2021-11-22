@@ -11,7 +11,7 @@ import CoreLocation
 
 final class MapViewModel: NSObject, ObservableObject {
     
-    @Published var centerCoordinate: CLLocationCoordinate2D = .zero
+    @Published var centerCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 55.751244, longitude: 37.618423)
     @Published var coordinateInPolygon: Bool = false
     
     @Published var needUpdate = false

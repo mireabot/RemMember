@@ -36,7 +36,7 @@ struct LocationPermition : View {
                     .font(.system(size: 16))
                     .foregroundColor(.black.opacity(0.5))
                 
-                NavigationLink(destination: NotificationsPermitions()){
+                NavigationLink(destination: Map(flowState: .afterRegistration)){
                     ZStack{
                         Rectangle()
                             .fill(Color("blue"))

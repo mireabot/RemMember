@@ -29,17 +29,9 @@ struct PhoneView : View {
             HStack {
                 Text(phone.phone_name)
                     .font(.system(size: 20))
-                    .fontWeight(.bold)
+                    .fontWeight(.semibold)
                     .foregroundColor(.white)
                 Spacer()
-                ZStack {
-                    Circle()
-                        .fill(Color.white)
-                        .frame(width: 30, height: 30)
-                    Image(systemName: "checkmark")
-                        .font(.system(size: 16))
-                        .foregroundColor(.black)
-                }.opacity(name == phone.phone_name ? 1 : 0)
             }.padding()
         }
         .padding()

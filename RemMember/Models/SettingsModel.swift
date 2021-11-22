@@ -17,7 +17,7 @@ struct ProfileSettings : Identifiable {
 
 var profileSettings : [ProfileSettings] = [
     
-    ProfileSettings(image: "pin", name: "Адреса"),
+    ProfileSettings(image: "point", name: "Адреса"),
     ProfileSettings(image: "vercion", name: "Мое устройство")
     
 ]

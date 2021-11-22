@@ -51,6 +51,7 @@ struct AdressView : View {
                             .frame(width: 30, height: 30)
                     }
                     Image("checkmark")
+                        .resizable()
                         .frame(width: 20,height: 20)
                 }
             }.padding()

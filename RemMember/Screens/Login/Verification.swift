@@ -189,10 +189,9 @@ struct Verification: View {
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .frame(maxWidth: UIScreen.main.bounds.width / 1.3, maxHeight: 50)
+                    .frame(width: UIScreen.main.bounds.width - 50,height: 56)
                     .background(Color("blue"))
-                    .cornerRadius(6)
-                    .shadow(color: Color("blue").opacity(0.8), radius: 6, x: 1, y: 1)
+                    .cornerRadius(12)
                     .opacity(viewModel.isLoadingVerify ? 0.2 : 1)
                     .overlay(
                         viewModel.isLoadingVerify ? ProgressView() : nil

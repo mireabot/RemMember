@@ -19,6 +19,7 @@ struct Home1 : View {
     @State var showAdress = false
     @State var showAccessories = false
     @State var showAlert = false
+    @State var showTypes = false
     @StateObject var Homemodel = HomeViewModel()
     @State var showingPopup = false
     @State var orderCreated = false
@@ -172,10 +173,10 @@ struct Home1 : View {
                                                         }
                                                         else {
                                                             self.Homemodel.cartItems.append(Cart(item: item, quantity: 1))
-                                                            if item.item_type == "Ремонт в офисе" {
-                                                                self.trig = true
-                                                                print("ok")
-                                                            }
+//                                                            if item.item_type == "Ремонт в офисе" {
+//                                                                self.trig = true
+//                                                                print("ok")
+//                                                            }
                                                         }
                                                     }){
                                                         ZStack{
@@ -254,9 +255,18 @@ struct Home1 : View {
                                                     ForEach(Homemodel.accessories){item in
                                                         ZStack {
                                                             AccessoriesViewForAll(item: item)
-                                                                .onTapGesture {
+                                                                
+                                                            
+                                                            HStack {
+                                                                Spacer()
+                                                                Button(action: {
                                                                     self.Homemodel.cartItemsAcc.append(CartAcc(accessori: item))
+                                                                }) {
+                                                                    Image(systemName: "plus")
+                                                                        .font(.title2)
+                                                                        .foregroundColor(.black)
                                                                 }
+                                                            }.padding()
                                                         }
                                                     }
                                                 }
