@@ -65,6 +65,8 @@ struct HelpPage : View {
             .background(Color.white)
             .cornerRadius(18)
             
+            
+            
             Spacer()
             
             VStack {

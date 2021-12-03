@@ -19,6 +19,7 @@ struct Home1 : View {
     @State var showAdress = false
     @State var showAccessories = false
     @State var showAlert = false
+    @State var showAlertAdd = false
     @State var showTypes = false
     @StateObject var Homemodel = HomeViewModel()
     @State var showingPopup = false
@@ -302,6 +303,7 @@ struct Home1 : View {
                                     ForEach(Homemodel.accessories){item in
                                         Button(action: {
                                             Homemodel.addToCartTest(item: item)
+                                            showAlertAdd.toggle()
                                         }) {
                                             AccessoriesView(item: item)
                                         }
@@ -311,8 +313,6 @@ struct Home1 : View {
                             .padding()
                             .padding(.horizontal,4)
                         }
-                        
-                        
                     }
                     .padding(.bottom,100)
                 }
@@ -326,6 +326,9 @@ struct Home1 : View {
         }
         .popup(isPresented: $showAlert, type: .toast, position: .top, autohideIn: 2) {
             alertTopToast()
+        }
+        .popup(isPresented: $showAlertAdd, type: .toast, position: .top, autohideIn: 2) {
+            createTopToastAdd()
         }
         .edgesIgnoringSafeArea(.bottom)
         .onAppear{
@@ -364,6 +367,25 @@ struct Home1 : View {
                         .lineLimit(2)
                         .font(.system(size: 14))
                         .foregroundColor(.white)
+                }
+            }
+            .padding(15)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 110)
+        .background(Color("blue"))
+    }
+    func createTopToastAdd() -> some View {
+        VStack {
+            Spacer(minLength: 20)
+            HStack() {
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack {
+                        Text("Добавили в корзину!")
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                        Spacer()
+                    }
                 }
             }
             .padding(15)

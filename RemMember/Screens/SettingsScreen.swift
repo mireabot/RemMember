@@ -90,7 +90,7 @@ struct SettingsScreen : View {
                 }.padding()
                 Spacer()
                 VStack(spacing: 10){
-                    Text("Версия 1.0 (20)")
+                    Text("Версия 1.0 (21)")
                         .font(.system(size: 14))
                         .foregroundColor(.black.opacity(0.4))
                         .fontWeight(.regular)

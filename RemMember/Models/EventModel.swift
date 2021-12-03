@@ -16,10 +16,10 @@ struct Event : Codable, Hashable, Identifiable {
     var event_name : String?
     var event_details : String?
     var event_image : String?
-    var event_new_details : String?
+    var event_new_details : Int?
 }
 
 extension Event {
-    static let empty = Event(id: "", event_name: "", event_details: "", event_image: "", event_new_details: "")
-    static let sample = Event(id: "", event_name: "", event_details: "", event_image: "", event_new_details: "")
+    static let empty = Event(id: "", event_name: "", event_details: "", event_image: "", event_new_details: 0)
+    static let sample = Event(id: "", event_name: "", event_details: "", event_image: "", event_new_details: 0)
 }
