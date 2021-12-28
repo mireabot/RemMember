@@ -15,6 +15,8 @@ struct SettingsScreen : View {
     @State var app_info_settings : AppInfoSettings = InfoSettings[0]
     @AppStorage("log_Status") var status = false
     @AppStorage("isLoggedIn") var isLogin: Bool = false
+    let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
     func Header(title: String,color: Color) -> HStack<TupleView<(Text, Spacer)>> {
         return // since both are same so were going to make it as reuable...
             HStack{
@@ -90,7 +92,7 @@ struct SettingsScreen : View {
                 }.padding()
                 Spacer()
                 VStack(spacing: 10){
-                    Text("Версия 1.0 (21)")
+                    Text("Версия \(appVersion ?? "") сборка \(bundleVersion ?? "")")
                         .font(.system(size: 14))
                         .foregroundColor(.black.opacity(0.4))
                         .fontWeight(.regular)

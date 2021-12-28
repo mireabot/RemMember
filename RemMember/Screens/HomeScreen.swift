@@ -129,7 +129,10 @@ struct Home1 : View {
                                     ForEach(Homemodel.events){event in
                                         
                                         //                                     Card View....
-                                        NavigationLink(destination: EventDetailView(Homemodel: Homemodel, event: event)) {
+                                        Button(action: {
+                                            Homemodel.addToCartTest(item: Accessories(id: event.id ?? "", item_name: event.event_name ?? "", item_image: event.event_image ?? "", item_cost: NSNumber(value: event.event_new_details ?? 0), item_body: ""))
+                                            showAlertAdd.toggle()
+                                        }) {
                                             Event_View(event: event)
                                         }
                                     }
