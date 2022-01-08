@@ -87,18 +87,42 @@ struct Detail: View {
                                 .font(.system(size: 18))
                                 .foregroundColor(.black)
                                 .fontWeight(.medium)
-                            HStack {
-                                Text("Гаранития 30 дней")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(.black)
-                                    .fontWeight(.medium)
-                                Image(systemName: "shield")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(Color("blue"))
+                            VStack{
+                                HStack(spacing: 15){
+                                    
+//                                    Image(systemName: "exclamationmark.triangle.fill")
+//                                        .font(.title2)
+//                                        .foregroundColor(.white)
+//                                        .padding(12)
+//                                        .background(
+//
+//                                            Color.gray
+//                                                .opacity(0.05)
+//                                                .clipShape(Circle())
+//                                        )
+//
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        
+                                        Text("Запчасти используемые в ремонте не являются сертифицированными. После установки компания Apple не сможет предоставить гарантийное обслуживание")
+                                            .font(.caption2.bold())
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.black.opacity(0.6))
+                                    
+                                            
+                                    }
+                                    
+                                    Spacer(minLength: 10)
+                                    
+                                }
+            //                    .padding(.top,20)
                             }
+                            .padding()
+                            .background(Color.red.opacity(0.3))
+                            .cornerRadius(18)
                         }
                         Spacer()
-                    }.padding()
+                    }
+                    .padding()
                 }
                 
                 // for smooth transition...

@@ -50,7 +50,8 @@ struct LocationPermition : View {
                                 .foregroundColor(Color.white)
                         }
                     }
-                }.disabled(Homemodel.permissionDenied != false ? true : false)
+                }
+//                .disabled(Homemodel.permissionDenied != false ? true : false)
             }
         }
         .onAppear{
@@ -58,10 +59,10 @@ struct LocationPermition : View {
         }
         .alert(isPresented: $Homemodel.permissionDenied, content: {
             
-            Alert(title: Text("Доступ отказан"), message: Text("Включите доступ в настройках приложения"), dismissButton: .default(Text("Перейти"), action: {
+            Alert(title: Text("Вы отключили геопозицию"), message: Text("Вы можете пользоваться приложением, но мы не сможем видеть где вы.Вы можете ввести свой адресс вручную"), dismissButton: .default(Text("Закрыть"), action: {
                 
                 // Redireting User To Settings...
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                print("No location")
             }))
         })
         .preferredColorScheme(.light)
