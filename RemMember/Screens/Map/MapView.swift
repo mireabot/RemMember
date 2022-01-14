@@ -21,6 +21,7 @@ struct Map: View {
     
     @StateObject var viewModel = MapViewModel()
     @StateObject var clientData = ClientInfo()
+    @StateObject var Homemodel = HomeViewModel()
     @State var presentedSearchAddress = false
     
     @AppStorage("first_lanch") var lanch = false
@@ -91,11 +92,22 @@ struct Map: View {
                     .transition(.move(edge: .top))
             }.ignoresSafeArea(.container, edges: .bottom)
         }.onAppear {
+            Homemodel.locationManager.delegate = Homemodel
             if flowState == .afterRegistration {
                 viewModel.createUser()
             }
-        }.navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
+        }
+        .alert(isPresented: $Homemodel.permissionDenied, content: {
+            
+            Alert(title: Text("Вы отключили геопозицию"), message: Text("Вы можете пользоваться приложением, но мы не сможем видеть где вы.Вы можете ввести свой адресс вручную"), dismissButton: .default(Text("Закрыть"), action: {
+                
+                // Redireting User To Settings...
+                print("No location")
+            }))
+        })
+        .preferredColorScheme(.light)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
     
     

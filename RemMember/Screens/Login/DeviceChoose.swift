@@ -464,7 +464,7 @@ struct DeviceChoise : View {
             
             Spacer()
             
-            NavigationLink(destination: LocationPermition()){
+            NavigationLink(destination: Map(flowState: .afterRegistration)){
                 ZStack{
                     Rectangle()
                         .fill(name != "" ? Color("blue") : Color.white)
