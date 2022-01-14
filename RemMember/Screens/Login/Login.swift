@@ -111,6 +111,7 @@ struct Login: View {
         .alert(isPresented: $viewModel.isError, content: {
             Alert(title: Text("Error"), message: Text(viewModel.errorMsg))
         })
+        .preferredColorScheme(.light)
     }
 }
 

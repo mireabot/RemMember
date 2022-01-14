@@ -210,6 +210,7 @@ struct Verification: View {
             RoundedRectangle(cornerRadius: 25)
         )
         .shadow(color: Color.black.opacity(0.2), radius: 25, x: 1, y: 1)
+        .preferredColorScheme(.light)
     }
 }
 

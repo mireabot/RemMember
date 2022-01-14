@@ -84,12 +84,6 @@ struct ProfileScreen : View {
                                 .foregroundColor(.gray)
                             
                         }
-                        .onTapGesture {
-                            showEdit.toggle()
-                        }
-                        .sheet(isPresented: $showEdit){
-                            PhoneEdit()
-                        }
                         .padding()
                     }
                     Spacer()
