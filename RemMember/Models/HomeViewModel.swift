@@ -26,7 +26,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
     @Published var showMenu = false
     
     // ItemData...
-    @Published var orders: [Order] = []
+//    @Published var orders: [Order] = []
     @Published var user_phones : [UserPhone] = []
     // Timed Event
     @Published var events = [Event]()
@@ -353,7 +353,8 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
             "payment_type": type,
             "repair_location": location,
             "active": true,
-            "client_ID" : Auth.auth().currentUser!.uid
+            "client_ID" : Auth.auth().currentUser!.uid,
+            "date": Date()
             
         ]) { (err) in
             
@@ -404,7 +405,8 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
             "status": "Заказ оформлен",
             "total_cost": calculateTotalPrice(),
             "order_number" : 0,
-            "client_ID" : Auth.auth().currentUser!.uid
+            "client_ID" : Auth.auth().currentUser!.uid,
+            "date": Date()
             
         ]) { (err) in
             

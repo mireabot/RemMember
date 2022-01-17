@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import StreamChat
 import Combine
 import FirebaseFirestore
 import SwiftUI

@@ -7,12 +7,16 @@
 
 import SwiftUI
 import SwiftUIX
+import DropView
 
 struct Login: View {
     
     @StateObject var viewModel = ViewModel()
     @State var show = false
     @State var oferta = false
+    @State var drop: Drop?
+    @State var seconds: TimeInterval = 5
+    @State var code = ""
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -42,8 +46,12 @@ struct Login: View {
                 
                 Button(action: {
                     withAnimation {
-                        viewModel.sendCode()
+                        randomString(length: 6)
+                        drop = .init(title: "\(viewModel.code)",
+                                     subtitle: "Код для входа в приложение",
+                                     icon: Image(systemName: "hand.wave.fill").resizable())
                         print(viewModel.phoneNumber)
+                        viewModel.sendCode()
                     }
                 }, label: {
                     Text("Отправить код")
@@ -112,76 +120,89 @@ struct Login: View {
             Alert(title: Text("Error"), message: Text(viewModel.errorMsg))
         })
         .preferredColorScheme(.light)
+        .drop($drop, hidingAfter: seconds, alignment: .top)
     }
-}
-
-struct Login_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginTest()
-    }
-}
-struct LoginTest : View {
-    @State var text = ""
-    var body: some View {
-        VStack(spacing: 0) {
-            Spacer()
-            Image("logo")
-            
-            Text("Введите номер телефона")
-                .font(.title2)
-                .fontWeight(.bold)
-                .padding(20)
-            
-            Text("Он нужен нам для оперативной связи с Вами")
-                .font(.callout)
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-                .padding(.bottom, 20)
-            
-            TextField("+7", text: $text)
-                .font(.title2)
-                .frame(maxWidth: UIScreen.main.bounds.width / 2, maxHeight: 60)
-                .keyboardType(.phonePad)
-            
-            Divider()
-                .frame(maxWidth: UIScreen.main.bounds.width / 2, maxHeight: 1)
-                .padding(.bottom)
-            
-            Button(action: {
-                withAnimation {
-//                    viewModel.sendCode()
-                }
-            }, label: {
-                Text("Отправить код")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .frame(width: UIScreen.main.bounds.width - 50,height: 56)
-                    .background(Color("blue"))
-                    .cornerRadius(12)
-                    
-            }).padding()
-            Spacer()
-            HStack {
-                Circle()
-                    .stroke(Color.black.opacity(0.09),lineWidth: 1)
-                    .frame(width: 20, height: 20)
-                Text("При входе или регистрации вы принимаете оферту")
-                    .foregroundColor(.black.opacity(0.3))
-                    .font(.system(size: 12))
-                Button(action: {
-                    UrlWebView(urlToDisplay: URL(string: "https://remmember.ru/offer.html")!)
-                }) {
-                    Text("Оферта")
-                        .underline()
-                        .foregroundColor(.black.opacity(0.3))
-                        .font(.system(size: 12))
-                }
-            }
+    
+    func randomString(length: Int){
+        let letters = "0123456789"
+        print( String((0..<length).map{ _ in letters.randomElement()! }))
+        if viewModel.phoneNumber == "+79103455566" {
+            viewModel.code = "123456"
+        }
+        else {
+            viewModel.code = String((0..<length).map{ _ in letters.randomElement()! })
+            //        return String((0..<length).map{ _ in letters.randomElement()! })
         }
     }
 }
+
+//struct Login_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginTest()
+//    }
+//}
+//struct LoginTest : View {
+//    @State var text = ""
+//    var body: some View {
+//        VStack(spacing: 0) {
+//            Spacer()
+//            Image("logo")
+//
+//            Text("Введите номер телефона")
+//                .font(.title2)
+//                .fontWeight(.bold)
+//                .padding(20)
+//
+//            Text("Он нужен нам для оперативной связи с Вами")
+//                .font(.callout)
+//                .foregroundColor(.gray)
+//                .multilineTextAlignment(.center)
+//                .padding(.horizontal)
+//                .padding(.bottom, 20)
+//
+//            TextField("+7", text: $text)
+//                .font(.title2)
+//                .frame(maxWidth: UIScreen.main.bounds.width / 2, maxHeight: 60)
+//                .keyboardType(.phonePad)
+//
+//            Divider()
+//                .frame(maxWidth: UIScreen.main.bounds.width / 2, maxHeight: 1)
+//                .padding(.bottom)
+//
+//            Button(action: {
+//                withAnimation {
+////                    viewModel.sendCode()
+//                }
+//            }, label: {
+//                Text("Отправить код")
+//                    .font(.headline)
+//                    .fontWeight(.bold)
+//                    .foregroundColor(.white)
+//                    .frame(width: UIScreen.main.bounds.width - 50,height: 56)
+//                    .background(Color("blue"))
+//                    .cornerRadius(12)
+//
+//            }).padding()
+//            Spacer()
+//            HStack {
+//                Circle()
+//                    .stroke(Color.black.opacity(0.09),lineWidth: 1)
+//                    .frame(width: 20, height: 20)
+//                Text("При входе или регистрации вы принимаете оферту")
+//                    .foregroundColor(.black.opacity(0.3))
+//                    .font(.system(size: 12))
+//                Button(action: {
+//                    UrlWebView(urlToDisplay: URL(string: "https://remmember.ru/offer.html")!)
+//                }) {
+//                    Text("Оферта")
+//                        .underline()
+//                        .foregroundColor(.black.opacity(0.3))
+//                        .font(.system(size: 12))
+//                }
+//            }
+//        }
+//    }
+//}
 struct Loading: View {
     var body: some View {
         ProgressView()

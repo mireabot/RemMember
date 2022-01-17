@@ -12,15 +12,7 @@ struct Verification: View {
     
     @ObservedObject var viewModel: ViewModel
     
-    @State var countPin = 6
-    @State var currentFocus = 0
-    
-    @State var pin1 = ""
-    @State var pin2 = ""
-    @State var pin3 = ""
-    @State var pin4 = ""
-    @State var pin5 = ""
-    @State var pin6 = ""
+    @State var sms_code = ""
     
     @State var isLoading: Bool = false
     
@@ -40,149 +32,22 @@ struct Verification: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             
-            HStack {
+            VStack {
                 
-                CocoaTextField("-", text: $pin1)
-                    .isFirstResponder(currentFocus == 0)
-                    .keyboardType(.numberPad)
-                    .font(.system(size: 18, weight: .bold))
-                    .lineLimit(1)
-                    .frame(maxWidth: 50, maxHeight: 50, alignment: .center)
+                TextField("Код", text: $sms_code)
                     .multilineTextAlignment(.center)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                            .strokeBorder(Color.gray.opacity(0.1), lineWidth: 2, antialiased: true)
-                    )
-                    .onChange(of: pin1, perform: { value in
-                        if value.count > 0 {
-                            currentFocus += 1
-                        }
-                    })
-                    .onTapGesture {
-                        currentFocus = 0
-                    }
+                    .font(.title2)
+                    .frame(maxWidth: UIScreen.main.bounds.width / 1.2)
+                    .keyboardType(.phonePad)
                 
-                CocoaTextField("-", text: $pin2)
-                    .isFirstResponder(currentFocus == 1)
-                    .keyboardType(.numberPad)
-                    .font(.system(size: 18, weight: .bold))
-                    .lineLimit(1)
-                    .frame(maxWidth: 50, maxHeight: 50, alignment: .center)
-                    .multilineTextAlignment(.center)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                            .strokeBorder(Color.gray.opacity(0.1), lineWidth: 2, antialiased: true)
-                    )
-                    .onChange(of: pin2, perform: { value in
-                        if value.count > 0 {
-                            currentFocus += 1
-                        }
-                    })
-                    .onTapGesture {
-                        currentFocus = 1
-                    }
-                
-                CocoaTextField("-", text: $pin3)
-                    .isFirstResponder(currentFocus == 2)
-                    .keyboardType(.numberPad)
-                    .font(.system(size: 18, weight: .bold))
-                    .lineLimit(1)
-                    .frame(maxWidth: 50, maxHeight: 50, alignment: .center)
-                    .multilineTextAlignment(.center)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                            .strokeBorder(Color.gray.opacity(0.1), lineWidth: 2, antialiased: true)
-                    )
-                    .onChange(of: pin3, perform: { value in
-                        if value.count > 0 {
-                            currentFocus += 1
-                        }
-                    })
-                    .onTapGesture {
-                        currentFocus = 2
-                    }
-                
-                CocoaTextField("-", text: $pin4)
-                    .isFirstResponder(currentFocus == 3)
-                    .keyboardType(.numberPad)
-                    .font(.system(size: 18, weight: .bold))
-                    .lineLimit(1)
-                    .frame(maxWidth: 50, maxHeight: 50, alignment: .center)
-                    .multilineTextAlignment(.center)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                            .strokeBorder(Color.gray.opacity(0.1), lineWidth: 2, antialiased: true)
-                    )
-                    .onChange(of: pin4, perform: { value in
-                        if value.count > 0 {
-                            currentFocus += 1
-                        }
-                    })
-                    .onTapGesture {
-                        currentFocus = 3
-                    }
-                
-                CocoaTextField("-", text: $pin5)
-                    .isFirstResponder(currentFocus == 4)
-                    .keyboardType(.numberPad)
-                    .font(.system(size: 18, weight: .bold))
-                    .lineLimit(1)
-                    .frame(maxWidth: 50, maxHeight: 50, alignment: .center)
-                    .multilineTextAlignment(.center)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                            .strokeBorder(Color.gray.opacity(0.1), lineWidth: 2, antialiased: true)
-                    )
-                    .onChange(of: pin5, perform: { value in
-                        if value.count > 0 {
-                            currentFocus += 1
-                        }
-                    })
-                    .onTapGesture {
-                        currentFocus = 4
-                    }
-                
-                CocoaTextField("-", text: $pin6)
-                    .isFirstResponder(currentFocus == 5)
-                    .keyboardType(.numberPad)
-                    .font(.system(size: 18, weight: .bold))
-                    .lineLimit(1)
-                    .frame(maxWidth: 50, maxHeight: 50, alignment: .center)
-                    .multilineTextAlignment(.center)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                            .strokeBorder(Color.gray.opacity(0.1), lineWidth: 2, antialiased: true)
-                    )
-                    .onChange(of: pin6, perform: { value in
-                        if value.count > 0 {
-                            currentFocus += 1
-                        }
-                    })
-                    .onTapGesture {
-                        currentFocus = 5
-                    }
+                Divider()
+                    .frame(maxWidth: UIScreen.main.bounds.width / 2, maxHeight: 1)
+                    .padding(.bottom)
                 
             }.padding()
             
-//            HStack {
-//                Text("Don't receive the OTP Code?")
-//                    .font(.callout)
-//                    .foregroundColor(.gray)
-//
-//                Button(action: {
-//                    viewModel.sendCode()
-//                }, label: {
-//                    Text("Resend OTP")
-//                        .font(.callout)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.orange)
-//                })
-//            }
-            
             Button(action: {
-                
-                let code = pin1+pin2+pin3+pin4+pin5+pin6
-                viewModel.verifyCode(code: code)
+                viewModel.verifyCode(code: sms_code,pin: viewModel.code)
                 
             }, label: {
                 Text("Далее")

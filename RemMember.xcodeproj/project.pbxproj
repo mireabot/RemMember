@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		351B869A271CC5E30001799A /* AppSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B8699271CC5E30001799A /* AppSettingsModel.swift */; };
-		3523CF6B271ADE5900B5D907 /* SwiftUIPolygonGeofence in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF6A271ADE5900B5D907 /* SwiftUIPolygonGeofence */; };
 		3523CF6D271ADF7B00B5D907 /* MapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523CF6C271ADF7B00B5D907 /* MapTest.swift */; };
-		3523CF70271B33EC00B5D907 /* StreamChat in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF6F271B33EC00B5D907 /* StreamChat */; };
-		3523CF72271B33EC00B5D907 /* StreamChatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3523CF71271B33EC00B5D907 /* StreamChatUI */; };
 		3523CF75271B349E00B5D907 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523CF74271B349E00B5D907 /* ChatScreen.swift */; };
+		352F899327943929002CE171 /* DropView in Frameworks */ = {isa = PBXBuildFile; productRef = 352F899227943929002CE171 /* DropView */; };
+		352F899527944768002CE171 /* UpdatePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352F899427944768002CE171 /* UpdatePage.swift */; };
 		353CBB9F274793FF003CE46E /* UrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353CBB9E274793FF003CE46E /* UrlView.swift */; };
 		353ED12B271AAA5000373275 /* RemMemberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED12A271AAA5000373275 /* RemMemberApp.swift */; };
 		353ED12D271AAA5000373275 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED12C271AAA5000373275 /* ContentView.swift */; };
@@ -111,6 +110,7 @@
 		351B8699271CC5E30001799A /* AppSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsModel.swift; sourceTree = "<group>"; };
 		3523CF6C271ADF7B00B5D907 /* MapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTest.swift; sourceTree = "<group>"; };
 		3523CF74271B349E00B5D907 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
+		352F899427944768002CE171 /* UpdatePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePage.swift; sourceTree = "<group>"; };
 		353CBB9E274793FF003CE46E /* UrlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlView.swift; sourceTree = "<group>"; };
 		353ED127271AAA5000373275 /* RemMember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemMember.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		353ED12A271AAA5000373275 /* RemMemberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemMemberApp.swift; sourceTree = "<group>"; };
@@ -200,12 +200,10 @@
 				35B1BE18271AAE8300BDD9FB /* PopupView in Frameworks */,
 				35B1BE15271AAE6400BDD9FB /* BottomSheet in Frameworks */,
 				35B1BE0F271AAE3700BDD9FB /* iTextField in Frameworks */,
-				3523CF72271B33EC00B5D907 /* StreamChatUI in Frameworks */,
 				35B1BE0C271AAE2400BDD9FB /* SDWebImageSwiftUI in Frameworks */,
 				DB734F4FD0AC4274FB50C020 /* Pods_RemMember.framework in Frameworks */,
+				352F899327943929002CE171 /* DropView in Frameworks */,
 				35B1BE12271AAE4E00BDD9FB /* SwiftUIX in Frameworks */,
-				3523CF70271B33EC00B5D907 /* StreamChat in Frameworks */,
-				3523CF6B271ADE5900B5D907 /* SwiftUIPolygonGeofence in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +346,7 @@
 				35B1BE54271AB16000BDD9FB /* AdressView.swift */,
 				35B1BE56271AB17000BDD9FB /* HelpScreen.swift */,
 				357D0C30274935CC00284D11 /* PhoneEdit.swift */,
+				352F899427944768002CE171 /* UpdatePage.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -461,9 +460,7 @@
 				35B1BE11271AAE4E00BDD9FB /* SwiftUIX */,
 				35B1BE14271AAE6400BDD9FB /* BottomSheet */,
 				35B1BE17271AAE8300BDD9FB /* PopupView */,
-				3523CF6A271ADE5900B5D907 /* SwiftUIPolygonGeofence */,
-				3523CF6F271B33EC00B5D907 /* StreamChat */,
-				3523CF71271B33EC00B5D907 /* StreamChatUI */,
+				352F899227943929002CE171 /* DropView */,
 			);
 			productName = RemMember;
 			productReference = 353ED127271AAA5000373275 /* RemMember.app */;
@@ -547,7 +544,7 @@
 				35B1BE13271AAE6400BDD9FB /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				35B1BE16271AAE8300BDD9FB /* XCRemoteSwiftPackageReference "PopupView" */,
 				3523CF69271ADE5900B5D907 /* XCRemoteSwiftPackageReference "SwiftUIPolygonGeofence" */,
-				3523CF6E271B33EC00B5D907 /* XCRemoteSwiftPackageReference "stream-chat-swift" */,
+				352F899127943929002CE171 /* XCRemoteSwiftPackageReference "DropView" */,
 			);
 			productRefGroup = 353ED128271AAA5000373275 /* Products */;
 			projectDirPath = "";
@@ -706,6 +703,7 @@
 				35B1BE4D271AB10E00BDD9FB /* AccessoriesView.swift in Sources */,
 				35B1BE60271AB1C400BDD9FB /* DeviceChoose.swift in Sources */,
 				35B1BE2E271AAFA100BDD9FB /* AdressModel.swift in Sources */,
+				352F899527944768002CE171 /* UpdatePage.swift in Sources */,
 				D751C012274649020037C287 /* RoundedCorner.swift in Sources */,
 				35B1BE2A271AAF7800BDD9FB /* ClientOrderModel.swift in Sources */,
 				35B1BE5C271AB1A200BDD9FB /* Verification.swift in Sources */,
@@ -918,9 +916,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RemMember/RemMember.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_ASSET_PATHS = "\"RemMember/Preview Content\"";
-				DEVELOPMENT_TEAM = QXN4C7HFYF;
+				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RemMember/Info.plist;
@@ -936,7 +934,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Rem.RemMember;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -953,9 +951,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RemMember/RemMember.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_ASSET_PATHS = "\"RemMember/Preview Content\"";
-				DEVELOPMENT_TEAM = QXN4C7HFYF;
+				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RemMember/Info.plist;
@@ -971,7 +969,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Rem.RemMember;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1130,12 +1128,12 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		3523CF6E271B33EC00B5D907 /* XCRemoteSwiftPackageReference "stream-chat-swift" */ = {
+		352F899127943929002CE171 /* XCRemoteSwiftPackageReference "DropView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/getstream/stream-chat-swift";
+			repositoryURL = "https://github.com/sbertix/DropView.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 0.2.1;
 			};
 		};
 		35B1BE0A271AAE2400BDD9FB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
@@ -1181,20 +1179,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3523CF6A271ADE5900B5D907 /* SwiftUIPolygonGeofence */ = {
+		352F899227943929002CE171 /* DropView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3523CF69271ADE5900B5D907 /* XCRemoteSwiftPackageReference "SwiftUIPolygonGeofence" */;
-			productName = SwiftUIPolygonGeofence;
-		};
-		3523CF6F271B33EC00B5D907 /* StreamChat */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3523CF6E271B33EC00B5D907 /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
-			productName = StreamChat;
-		};
-		3523CF71271B33EC00B5D907 /* StreamChatUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3523CF6E271B33EC00B5D907 /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
-			productName = StreamChatUI;
+			package = 352F899127943929002CE171 /* XCRemoteSwiftPackageReference "DropView" */;
+			productName = DropView;
 		};
 		35B1BE0B271AAE2400BDD9FB /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

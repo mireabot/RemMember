@@ -11,21 +11,21 @@
         }
       },
       {
+        "package": "DropView",
+        "repositoryURL": "https://github.com/sbertix/DropView.git",
+        "state": {
+          "branch": null,
+          "revision": "ed67d5aa985581e9b91949f0a27b32726a791d7f",
+          "version": "0.2.1"
+        }
+      },
+      {
         "package": "iTextField",
         "repositoryURL": "https://github.com/benjaminsage/iTextField",
         "state": {
           "branch": null,
           "revision": "d272db0a18ec6bc072498d8ae40c3839cd79ec64",
           "version": "0.0.8"
-        }
-      },
-      {
-        "package": "Nuke",
-        "repositoryURL": "https://github.com/kean/Nuke.git",
-        "state": {
-          "branch": null,
-          "revision": "7f73ceaeacd5df75a7994cd82e165ad9ff1815db",
-          "version": "9.6.1"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
           "branch": null,
-          "revision": "a72df4849408da7e5d3c1b586797b7c601c41d1b",
-          "version": "5.12.1"
+          "revision": "0fff0d7505b5306348263ea64fcc561253bbeb21",
+          "version": "5.12.2"
         }
       },
       {
@@ -53,24 +53,6 @@
           "branch": null,
           "revision": "cd8625b7cf11a97698e180d28bb7d5d357196678",
           "version": "2.0.2"
-        }
-      },
-      {
-        "package": "Starscream",
-        "repositoryURL": "https://github.com/daltoniam/Starscream.git",
-        "state": {
-          "branch": null,
-          "revision": "df8d82047f6654d8e4b655d1b1525c64e1059d21",
-          "version": "4.0.4"
-        }
-      },
-      {
-        "package": "StreamChat",
-        "repositoryURL": "https://github.com/getstream/stream-chat-swift",
-        "state": {
-          "branch": null,
-          "revision": "5f5bb3d38b93fb3e2b67f1082ce7eebc5fb9dc95",
-          "version": "3.1.11"
         }
       },
       {
@@ -89,15 +71,6 @@
           "branch": null,
           "revision": "eb6a23fc4cc79545e40a8cf5c82119684750194f",
           "version": "0.1.1"
-        }
-      },
-      {
-        "package": "SwiftyGif",
-        "repositoryURL": "https://github.com/kirualex/SwiftyGif.git",
-        "state": {
-          "branch": null,
-          "revision": "8d576b09553aea8e345e1b35c3b71cb6a84ac999",
-          "version": "5.4.2"
         }
       }
     ]

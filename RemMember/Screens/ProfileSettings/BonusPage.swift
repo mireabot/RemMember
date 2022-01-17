@@ -127,11 +127,10 @@ struct BonusPage : View {
     func shareButton(code: String) {
         showShare.toggle()
         
-        let av = UIActivityViewController(activityItems: ["Ваш промокод \(code)!\nСкачай приложение по ссылке"], applicationActivities: nil)
+        let av = UIActivityViewController(activityItems: ["Ваш промокод \(code)!\nСкачай приложение по ссылке https://apps.apple.com/ru/app/remmember/id1578909155?l=en"], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
-
 
 struct BonusPage_Previews: PreviewProvider {
     static var previews: some View {

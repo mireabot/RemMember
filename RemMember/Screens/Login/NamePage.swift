@@ -72,9 +72,6 @@ struct NamePage : View {
         .onTapGesture {
             hideKeyboard()
         }
-        .onAppear{
-            Homemodel.login()
-        }
         .preferredColorScheme(.light)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)

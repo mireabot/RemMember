@@ -29,6 +29,7 @@ struct SettingsScreen : View {
                 Spacer()
             }
     }
+    @State var show_updates = false
     var body: some View {
         ZStack {
             Color.gray.opacity(0.04).edgesIgnoringSafeArea(.all)
@@ -71,6 +72,22 @@ struct SettingsScreen : View {
                 VStack(spacing: 10){
                     ForEach(InfoSettings){settings in
                         AppInfoSettingsView(settings: settings)
+                    }
+                    Button(action: {
+                        show_updates.toggle()
+                    }) {
+                        HStack {
+                            
+                            Text("Что нового?").foregroundColor(.black).font(.system(size: 20))
+                            
+                            Spacer(minLength: 10)
+                            
+                            Image("new").renderingMode(.original).resizable().frame(width: 24,height: 24)
+                            
+                        }.padding()
+                    }
+                    .fullScreenCover(isPresented: $show_updates) {
+                        UpdatePage()
                     }
                 }
                 Spacer()

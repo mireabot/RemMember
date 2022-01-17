@@ -68,7 +68,7 @@ struct OrderHistoryView : View {
                     .foregroundColor(Color("blue"))
             }.padding()
             HStack {
-                Text("#\(history.order_number ?? 0) на \(history.total_cost ?? "")₽")
+                Text("#\(history.order_number ?? 0) на \(history.total_cost ?? "")₽ \(Text("от \(history.date,style: .date)").font(.system(size: 14)).foregroundColor(.black).fontWeight(.medium))")
                     .fontWeight(.bold)
                     .font(.system(size: 18))
                     .foregroundColor(.black)
