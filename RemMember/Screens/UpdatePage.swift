@@ -56,7 +56,7 @@ struct UpdatePage : View {
             
             HStack {
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("- Добавили верификацию телефона")
+                    Text("- Обновили всплывающие уведомления")
                         .fontWeight(.medium)
                         .font(.system(size: 16))
                         .foregroundColor(.black)

@@ -8,11 +8,13 @@
 import Foundation
 import SwiftUI
 import Firebase
+import AlertX
 
 struct SettingsScreen : View {
     @Environment(\.presentationMode) var present
     @State var profile_settings : ProfileSettings = profileSettings[0]
     @State var app_info_settings : AppInfoSettings = InfoSettings[0]
+    @State var confirm = false
     @AppStorage("log_Status") var status = false
     @AppStorage("isLoggedIn") var isLogin: Bool = false
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -93,18 +95,30 @@ struct SettingsScreen : View {
                 Spacer()
                 HStack {
                     Button(action: {
-                        self.present.wrappedValue.dismiss()
-                        try? Auth.auth().signOut()
-                        withAnimation{
-                            status = false
-                            isLogin = false
-                            
-                        }
+                        confirm.toggle()
                     }){
                         Text("Выйти")
                             .foregroundColor(.red)
                             .font(.system(size: 20))
                     }
+                    .alertX(isPresented: $confirm, content: {
+                        
+                        AlertX(title: Text("Вы действительно хотите выйти?"),
+                               primaryButton: .cancel(Text("Закрыть"),action: {
+                            self.confirm = false
+                        }),
+                               secondaryButton: .default(Text("Выйти"), action: {
+                            self.present.wrappedValue.dismiss()
+                            try? Auth.auth().signOut()
+                            withAnimation{
+                                status = false
+                                isLogin = false
+                                
+                            }
+                        }),
+                               theme: .custom(windowColor: Color.white, alertTextColor: Color.black, enableShadow: false, enableRoundedCorners: true, enableTransparency: true, cancelButtonColor: Color.black, cancelButtonTextColor: Color.white, defaultButtonColor: Color.red, defaultButtonTextColor: Color.white),
+                               animation: .fadeEffect())
+                    })
                     Spacer()
                 }.padding()
                 Spacer()
