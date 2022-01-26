@@ -48,6 +48,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
     @Published var cartItemsAcc : [CartAcc] = []
     @Published var ordered = false
     private var db = Firestore.firestore()
+    @State var order_number = 0
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         
@@ -240,6 +241,27 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
         }
     }
     
+    func UpdateorderStatusHistory(user_id: String, date: Date,number: Int){
+        
+        let ref = Firestore.firestore()
+        
+        ref.collection("Orders_History_\(user_id)").whereField("order_number", isEqualTo: number).getDocuments(){ (q, err) in
+            if err != nil {
+                print(err!.localizedDescription)
+                return
+            }
+          /*  else if q!.documents.count != 1{
+                print(err!.localizedDescription)
+                return
+            } */
+            else {
+                let document = q!.documents.first
+                document?.reference.updateData(["status" : "Отменен"])
+                document?.reference.updateData(["date" : date])
+            }
+        }
+    }
+    
     func addToCart(item: iPhones){
         
         // checking it is added...
@@ -306,7 +328,8 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
     
     // writing Order Data into FIrestore...
     
-    func createOrder(type: String, location: String){
+    func createOrder(type: String, location: String,number: Int){
+        
         
         let db = Firestore.firestore()
         
@@ -349,7 +372,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
             "status": "Заказ оформлен",
             "client_device" : device ?? "",
             "total_cost": calculateTotalPrice(),
-            "order_number" : Int.random(in: 1..<1000),
+            "order_number" : number,
             "payment_type": type,
             "repair_location": location,
             "active": true,
@@ -364,6 +387,29 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
             }
             print("success")
         }
+        
+        db.collection("Orders_History_\(Auth.auth().currentUser!.uid)").document(randomString(length: 20)).setData([
+            
+            "order": details,
+            "client_adress": "\(retrive1)  \n\(retrive2)",
+            "status": "Заказ оформлен",
+            "total_cost": calculateTotalPrice(),
+            "order_number" : number,
+            "client_ID" : Auth.auth().currentUser!.uid,
+            "date": Date()
+            
+        ]) { (err) in
+            
+            if err != nil{
+                self.ordered = false
+                return
+            }
+            print("success")
+        }
+        
+        cartItems.removeAll()
+        cartItemsAcc.removeAll()
+//        order_number = 0
     }
     func createOrderHistory(){
         
@@ -404,7 +450,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
             "client_adress": "\(retrive1)  \n\(retrive2)",
             "status": "Заказ оформлен",
             "total_cost": calculateTotalPrice(),
-            "order_number" : 0,
+            "order_number" : order_number,
             "client_ID" : Auth.auth().currentUser!.uid,
             "date": Date()
             
@@ -419,6 +465,7 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
         
         cartItems.removeAll()
         cartItemsAcc.removeAll()
+        order_number = 0
     }
     
     
@@ -557,6 +604,13 @@ class HomeViewModel: NSObject,ObservableObject,CLLocationManagerDelegate{
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         print( String((0..<length).map{ _ in letters.randomElement()! }))
         return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    func OrderNumber(length: Int) -> Int {
+        let letters = "0123456789"
+        print(String((0..<length).map{ _ in letters.randomElement()! }))
+        order_number = Int(String((0..<length).map{ _ in letters.randomElement()! })) ?? 0
+        return Int(String((0..<length).map{ _ in letters.randomElement()! })) ?? 0
     }
 }
 

@@ -11,6 +11,7 @@ import SwiftUI
 
 
 struct OrderHistoryPage : View {
+    @State var userID = UserDefaults.standard.string(forKey: "UserID")
     @StateObject var userData = UserView()
     var body: some View {
         VStack {
@@ -36,7 +37,7 @@ struct OrderHistoryPage : View {
             }
             else {
                 ScrollView(.vertical, showsIndicators: false){
-                    VStack(spacing: 10){
+                    VStack(spacing: 25){
                         ForEach(userData.history){ order in
                             OrderHistoryView(history: order)
                         }
@@ -47,7 +48,7 @@ struct OrderHistoryPage : View {
             Spacer()
             
         }.onAppear{
-            self.userData.fetchOrderHistory(client_id: Auth.auth().currentUser!.uid)
+            self.userData.fetchOrderHistory()
         }
     }
 }
@@ -56,50 +57,45 @@ struct OrderHistoryPage : View {
 struct OrderHistoryView : View {
     var history : Orderhistory
     var body: some View {
-        VStack(spacing: 10) {
+        HStack(spacing: 10) {
             HStack {
-                Text(history.client_adress ?? "")
-                    .foregroundColor(.black.opacity(0.5))
-                    .font(.system(size: 14))
-                Spacer()
-                Text(history.status ?? "")
-                    .font(.system(size: 16))
-                    .fontWeight(.medium)
-                    .foregroundColor(Color("blue"))
-            }.padding()
-            HStack {
-                Text("#\(history.order_number ?? 0) на \(history.total_cost ?? "")₽ \(Text("от \(history.date,style: .date)").font(.system(size: 14)).foregroundColor(.black).fontWeight(.medium))")
-                    .fontWeight(.bold)
-                    .font(.system(size: 18))
-                    .foregroundColor(.black)
-                Spacer()
-            }.padding()
-            ForEach(history.order, id: \.self){ order in
-                VStack(spacing: 15){
-                    HStack {
-                        Text(order.item_name)
-                            .font(.system(size: 16))
-                            .foregroundColor(.black)
-                        Spacer()
-                        Text("\(String(order.item_cost)) ₽")
-                            .font(.system(size: 16))
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                    }
+                ZStack {
                     Rectangle()
-                        .fill(Color.gray.opacity(0.2))
-                        .frame(width: UIScreen.main.bounds.width - 90, height: 1)
+                        .fill(Color.white)
+                        .frame(width: 56, height: 56)
+                        .cornerRadius(10)
+                    Circle()
+                        .fill(history.status == "Отменен" ? Color.red : Color("blue"))
+                        .frame(width: 24, height: 24)
                 }
             }
-
+            VStack(alignment: .leading, spacing: 10) {
+                Text(history.status ?? "")
+                    .foregroundColor(.black)
+                    .fontWeight(.medium)
+                    .font(.system(size: 16))
+                Text("Заказ #\(history.order_number ?? 0)")
+                    .foregroundColor(.black.opacity(0.7))
+                    .fontWeight(.regular)
+                    .font(.system(size: 14))
+                Text("\(history.order.count) услуги")
+                    .foregroundColor(.black.opacity(0.7))
+                    .fontWeight(.regular)
+                    .font(.system(size: 14))
+            }
+            Spacer()
+            Text(history.date.getFormattedDate(format: "dd.MM.yyyy"))
+                .foregroundColor(.black.opacity(0.7))
+                .fontWeight(.regular)
+                .font(.system(size: 14))
         }
         .padding()
-        .padding(.bottom,25)
-        .background(Color.white)
+//        .padding(.bottom,25)
+        .background(Color("history_bg"))
         .cornerRadius(25)
-        .padding(.vertical)
-        .padding(.bottom)
-        .padding(.horizontal,25)
+//            .padding(.vertical)
+//            .padding(.bottom)
+        .padding(.horizontal,20)
         .shadow(color: Color.black.opacity(0.04), radius: 5, x: 5, y: 5)
     }
 }

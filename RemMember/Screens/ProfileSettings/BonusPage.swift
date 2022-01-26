@@ -120,7 +120,6 @@ struct BonusPage : View {
         .navigationBarHidden(true)
         .preferredColorScheme(.light)
         .onAppear{
-            self.userData.fetchOrderHistory(client_id: Auth.auth().currentUser!.uid)
             self.userData.fetchAndMap()
         }
     }

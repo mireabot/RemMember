@@ -210,7 +210,7 @@ struct ProfileScreen : View {
         .edgesIgnoringSafeArea(.bottom)
         .onAppear{
             self.userData.fetchAndMap()
-            userData.fetchOrderHistory(client_id: userID ?? "")
+            print(userID ?? "")
             orderData.fetchAndMap()
             guard let retrive1  = UserDefaults.standard.string(forKey: "ClientName") else { return }
             self.name = retrive1

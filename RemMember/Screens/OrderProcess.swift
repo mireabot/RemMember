@@ -149,6 +149,7 @@ struct OrderScreen: View {
                    primaryButton: .cancel(Text("Закрыть")),
                    secondaryButton: .default(Text("Отменить"), action: {
                 self.Homemodel.cancelOrder(name: userID)
+                self.Homemodel.UpdateorderStatusHistory(user_id: userID, date: Date(), number: viewModel.book.order_number ?? 0)
                 withAnimation{status = false}
                 self.present.wrappedValue.dismiss()
             }),

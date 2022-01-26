@@ -19,6 +19,7 @@ struct CartView : View {
     @StateObject var viewModel = StatsModel()
     @State var payment_type = ""
     @State var repair_type = ""
+    @Binding var order_created : Bool
     @AppStorage("orderCreated") var status = false
     @AppStorage("trig") var trig = false
     @Environment(\.presentationMode) var present
@@ -377,9 +378,9 @@ struct CartView : View {
                         self.trig = false
                         homeData.SetAmountStats(count: Int(homeData.calculateTotalPrice()) ?? 0, oldCount: viewModel.stats.amount ?? 0)
                         homeData.SetOrdersStats(count: 1, oldCount: viewModel.stats.orders ?? 0)
-                        homeData.createOrder(type: payment_type,location: repair_type)
-                        homeData.createOrderHistory()
-                        withAnimation{status = true}
+                        homeData.createOrder(type: payment_type,location: repair_type, number: Int.random(in: 1..<1000))
+//                        homeData.createOrderHistory()
+                        order_created.toggle()
                         self.present.wrappedValue.dismiss()
                     }){
                         Text("Оформить заказ")

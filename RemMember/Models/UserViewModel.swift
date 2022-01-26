@@ -60,8 +60,8 @@ class UserView: ObservableObject {
             }
         }
     }
-    func fetchOrderHistory(client_id: String) {
-        db.collection("Orders_History").whereField("client_ID", isEqualTo: client_id).whereField("status", isEqualTo: "Завершен").addSnapshotListener { (querySnapshot, error) in
+    func fetchOrderHistory() {
+        db.collection("Orders_History_\(userID ?? "")").order(by: "date", descending: true).addSnapshotListener { (querySnapshot, error) in
         guard let documents = querySnapshot?.documents else {
           print("No documents")
           return

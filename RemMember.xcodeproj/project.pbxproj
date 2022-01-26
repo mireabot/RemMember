@@ -22,6 +22,7 @@
 		353ED148271AAA5200373275 /* RemMemberUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ED147271AAA5200373275 /* RemMemberUITestsLaunchTests.swift */; };
 		357D0C31274935CC00284D11 /* PhoneEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357D0C30274935CC00284D11 /* PhoneEdit.swift */; };
 		358FA2432795B1ED00EFA03D /* AlertX in Frameworks */ = {isa = PBXBuildFile; productRef = 358FA2422795B1ED00EFA03D /* AlertX */; };
+		3591906C27A1C65400EF9B4A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3591906B27A1C65400EF9B4A /* Date.swift */; };
 		35B1BE07271AADA500BDD9FB /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE06271AADA500BDD9FB /* MainItem.swift */; };
 		35B1BE09271AADE100BDD9FB /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1BE08271AADE100BDD9FB /* SettingsModel.swift */; };
 		35B1BE0C271AAE2400BDD9FB /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 35B1BE0B271AAE2400BDD9FB /* SDWebImageSwiftUI */; };
@@ -124,6 +125,7 @@
 		353ED145271AAA5200373275 /* RemMemberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemMemberUITests.swift; sourceTree = "<group>"; };
 		353ED147271AAA5200373275 /* RemMemberUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemMemberUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		357D0C30274935CC00284D11 /* PhoneEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEdit.swift; sourceTree = "<group>"; };
+		3591906B27A1C65400EF9B4A /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		35B1BE06271AADA500BDD9FB /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		35B1BE08271AADE100BDD9FB /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		35B1BE19271AAEA300BDD9FB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				35B1BE7B271AB2A600BDD9FB /* Alerts.swift */,
 				3523CF6C271ADF7B00B5D907 /* MapTest.swift */,
 				353CBB9E274793FF003CE46E /* UrlView.swift */,
+				3591906B27A1C65400EF9B4A /* Date.swift */,
 			);
 			path = "System Components";
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				35B1BE4D271AB10E00BDD9FB /* AccessoriesView.swift in Sources */,
 				35B1BE60271AB1C400BDD9FB /* DeviceChoose.swift in Sources */,
 				35B1BE2E271AAFA100BDD9FB /* AdressModel.swift in Sources */,
+				3591906C27A1C65400EF9B4A /* Date.swift in Sources */,
 				352F899527944768002CE171 /* UpdatePage.swift in Sources */,
 				D751C012274649020037C287 /* RoundedCorner.swift in Sources */,
 				35B1BE2A271AAF7800BDD9FB /* ClientOrderModel.swift in Sources */,
@@ -920,7 +924,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RemMember/RemMember.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"RemMember/Preview Content\"";
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				ENABLE_PREVIEWS = YES;
@@ -938,7 +942,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Rem.RemMember;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -955,7 +959,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RemMember/RemMember.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"RemMember/Preview Content\"";
 				DEVELOPMENT_TEAM = 9S2MZXD36G;
 				ENABLE_PREVIEWS = YES;
@@ -973,7 +977,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Rem.RemMember;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

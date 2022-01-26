@@ -28,7 +28,7 @@ struct Home1 : View {
     @StateObject var clientModel = ClientInfo()
     @StateObject var orderData = OrderTestModel()
     @StateObject var settings = AppSettingsModel()
-    @AppStorage("orderCreated") var status = false
+    @State var status = false
     @AppStorage("trig") var trig = false
     @Environment(\.presentationMode) var present
     @State var userID = UserDefaults.standard.string(forKey: "UserID")
@@ -91,7 +91,7 @@ struct Home1 : View {
                                 .foregroundColor(.black)
                         }
                         .fullScreenCover(isPresented: $showCart){
-                            CartView(homeData: Homemodel)
+                            CartView(homeData: Homemodel, order_created: $status)
                         }
                         .overlay(
                             
