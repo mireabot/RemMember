@@ -8,6 +8,12 @@ You can see some facts and samples below:
 
 https://www.figma.com/file/ATRfaMHaZ8VK9EKyiVg76E/RemMember?node-id=0%3A1
 
+# Stack
+
+- SwiftUI
+- Firebase
+- Google Push Service
+
 # Project cover and code sample
 
 ![Alt text](https://dim.mcusercontent.com/cs/4498468663ace51c5029b39d4/images/5bc50f27-a130-23bb-a510-9de0076fb008.png?w=608&dpr=2)
